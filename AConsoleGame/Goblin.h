@@ -2,5 +2,6 @@
 #include "Enemy.h"
 class Goblin
 {
+	void Backstab();
 };
 
