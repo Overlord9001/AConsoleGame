@@ -14,16 +14,10 @@ using namespace std;
 #define ARROW_DOWN  0x50
 
 
-
-
-
-
-
 int main()
 {
-	
 	Map m;
-	
+
 	m.MapSetup(m.map, MAPX, MAPY);
 
 	int playerX = 5;
@@ -42,7 +36,6 @@ int main()
 		cout << endl;
 	}
 	
-
 	while (run)
 	{
 		// save old position
@@ -74,7 +67,5 @@ int main()
 			playerY = oldY;
 			playerX = oldX;
 		}
-		
-		
 	}
 }
