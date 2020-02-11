@@ -1,6 +1,7 @@
 
 // includes
 #include <iostream>
+#include <string>
 #include <conio.h>
 #include <Windows.h>
 #include <vector> 
@@ -9,6 +10,9 @@
 #include "Map.h"
 #include "Enemy.h"
 #include "Goblin.h"
+#include <Windows.h>
+#include "Lizardman.h"
+
 
 // usings
 using namespace std;
@@ -21,7 +25,10 @@ using namespace std;
 
 int main()
 {
-	
+	//Window top left fullscreen
+	HWND console = GetConsoleWindow();
+	MoveWindow(console, 0, 0, 1920, 1080, TRUE);
+
 	Map* map = Map::Instance();
 	
 	vector<Enemy*> enemies;
