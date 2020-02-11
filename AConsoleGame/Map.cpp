@@ -44,20 +44,27 @@ void Map::MapSetup(int mapX, int mapY)
 	{
 		for (int y = 0; y < mapY; y++)
 		{
-			map[y][x] = '.';
+			if (x == 0 || x == mapX - 1 || y == 0 || y == mapY - 1)
+			{
+				map[y][x] = 'O';
+			}
+			else
+			{
+				map[y][x] = '.';
+			}
 		}
 	}
 
-	for (int x = 0; x < mapX; x++)
-	{
-		map[0][x] = 'O'; // top edge
-		map[mapY - 1][x] = 'O'; // bottom edge
-	}
-	for (int y = 0; y < mapY; y++)
-	{
-		map[y][0] = 'O'; // left edge
-		map[y][mapX - 1] = 'O'; // right edge
-	}
+	//for (int x = 0; x < mapX; x++)
+	//{
+	//	map[0][x] = 'O'; // top edge
+	//	map[mapY - 1][x] = 'O'; // bottom edge
+	//}
+	//for (int y = 0; y < mapY; y++)
+	//{
+	//	map[y][0] = 'O'; // left edge
+	//	map[y][mapX - 1] = 'O'; // right edge
+	//}
 }
 
 Map::Map()

@@ -17,10 +17,6 @@ using namespace std;
 #define ARROW_DOWN  0x50
 
 
-
-
-
-
 int main()
 {
 	
@@ -104,7 +100,5 @@ int main()
 			}
 			updateEnemies = false;
 		}
-		
-		
 	}
 }
