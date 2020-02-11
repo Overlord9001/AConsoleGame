@@ -6,6 +6,8 @@ using namespace std;
 
 class Enemy
 {
+
+public:
 	int hitPoint;
 	int damage;
 	int armorClass;
