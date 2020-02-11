@@ -7,6 +7,7 @@
 
 #include "Map.h"
 #include "Enemy.h"
+#include "Goblin.h"
 
 // usings
 using namespace std;
@@ -22,8 +23,8 @@ int main()
 	
 	Map* map = Map::Instance();
 	
-	vector<Enemy> enemies;
-	enemies.push_back(Enemy(10, 10, 10, 10));
+	vector<Enemy*> enemies;
+	enemies.push_back(new Goblin(10, 10, 10, 10));
 	
 	map->MapSetup(MAPX, MAPY);
 
@@ -44,7 +45,7 @@ int main()
 		cout << endl;
 	}
 	
-	bool updateEnemies = false;
+	int updateEnemies = 0;
 	while (run)
 	{
 		// save old position
@@ -55,19 +56,19 @@ int main()
 		{
 		case ARROW_UP:
 			playerY--;
-			updateEnemies = true;
+			updateEnemies++;
 			break;
 		case ARROW_DOWN:
 			playerY++;
-			updateEnemies = true;
+			updateEnemies++;
 			break;
 		case ARROW_RIGHT:
 			playerX++;
-			updateEnemies = true;
+			updateEnemies++;
 			break;
 		case ARROW_LEFT:
 			playerX--;
-			updateEnemies = true;
+			updateEnemies++;
 			break;
 		}
 
@@ -78,12 +79,12 @@ int main()
 		}
 		else if (map->map[playerY][playerX] == 'E') // if moving onto an enemy
 		{
-			for (Enemy enemy : enemies)
+			for (Enemy* enemy : enemies)
 			{
-				if (enemy.x == playerX && enemy.y == playerY)
+				if (enemy->x == playerX && enemy->y == playerY)
 				{
 					// begin combat
-					enemy.
+					Goblin * g = dynamic_cast<Goblin*>(enemy);
 				}
 			}
 		}
@@ -92,11 +93,11 @@ int main()
 			map->Move(oldX, oldY, playerX, playerY, 'M');
 		}
 
-		if (updateEnemies)
+		if (updateEnemies >= 2)
 		{
-			for (Enemy enemy : enemies)
+			for (Enemy * enemy : enemies)
 			{
-				enemy.Move();
+				enemy->Move();
 			}
 			updateEnemies = false;
 		}
