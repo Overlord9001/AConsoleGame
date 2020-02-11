@@ -1,9 +1,13 @@
 
 // includes
 #include <iostream>
+#include <string>
 #include <conio.h>
 #include <Windows.h>
 #include "Map.h"
+#include <Windows.h>
+#include "Lizardman.h"
+
 
 // usings
 using namespace std;
@@ -21,10 +25,15 @@ using namespace std;
 
 int main()
 {
-	
+	//Window top left fullscreen
+	HWND console = GetConsoleWindow();
+	MoveWindow(console, 0, 0, 1920, 1080, TRUE);
+
 	Map m;
 	
 	m.MapSetup(m.map, MAPX, MAPY);
+
+
 
 	int playerX = 5;
 	int playerY = 5;
