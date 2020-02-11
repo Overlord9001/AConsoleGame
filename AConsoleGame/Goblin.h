@@ -3,5 +3,6 @@
 class Goblin
 {
 	void Backstab();
+
 };
 

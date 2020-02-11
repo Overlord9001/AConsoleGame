@@ -3,6 +3,16 @@
 #include <iostream>
 using namespace std;
 
+Map* Map::instance = 0; // set the instance pointer to null 
+
+Map * Map::Instance()
+{
+	if (instance == nullptr)
+		instance = new Map;
+	return instance;
+
+}
+
 // Taken from the net https://stackoverflow.com/questions/34842526/update-console-without-flickering-c
 // Used to update screen without flicker
 void Map::SetCursorPosition(int x, int y)
@@ -15,18 +25,20 @@ void Map::SetCursorPosition(int x, int y)
 
 void Map::Move(int oldX, int oldY, int newX, int newY, char icon)
 {
+	// update the visuals
 	SetCursorPosition(oldX * 2, oldY);
 	cout << ".";
 	SetCursorPosition(newX * 2, newY);
 	cout << icon;
 	SetCursorPosition(0, 0);
 
+	// update the array
 	map[oldY][oldX] = '.';
-	map[newY][oldX] = icon;
+	map[newY][newX] = icon;
 }
 
 // Create map
-void Map::MapSetup(char map[MAPY][MAPX], int mapX, int mapY)
+void Map::MapSetup(int mapX, int mapY)
 {
 	for (int x = 0; x < mapX; x++)
 	{
