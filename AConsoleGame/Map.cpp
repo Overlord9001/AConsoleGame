@@ -3,6 +3,7 @@
 #include <iostream>
 using namespace std;
 
+static const HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 Map* Map::instance = 0; // set the instance pointer to null 
 
 Map * Map::Instance()
@@ -17,20 +18,36 @@ Map * Map::Instance()
 // Used to update screen without flicker
 void Map::SetCursorPosition(int x, int y)
 {
-	static const HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	cout.flush();
 	COORD coord = { (SHORT)x, (SHORT)y };
 	SetConsoleCursorPosition(hOut, coord);
 }
 
+// update the visuals
 void Map::Move(int oldX, int oldY, int newX, int newY, char icon)
 {
-	// update the visuals
-	SetCursorPosition(oldX * 2, oldY);
+	// set the old pos to empty
+	SetCursorPosition(oldX * 2, oldY); // *2 because of the spacing between when drawing
 	cout << ".";
+
+	// choose a correct color
+	switch (icon)
+	{
+	case 'M': // player
+		SetConsoleTextAttribute(hOut, 10); // green
+		break;
+	case 'E': // enemy
+		SetConsoleTextAttribute(hOut, 4); // red
+		break;
+	}
+
+	// draw the new position 
 	SetCursorPosition(newX * 2, newY);
 	cout << icon;
 	SetCursorPosition(0, 0);
+
+	// set the color back to white
+	SetConsoleTextAttribute(hOut, 15);
 
 	// update the array
 	map[oldY][oldX] = '.';
@@ -54,17 +71,6 @@ void Map::MapSetup(int mapX, int mapY)
 			}
 		}
 	}
-
-	//for (int x = 0; x < mapX; x++)
-	//{
-	//	map[0][x] = 'O'; // top edge
-	//	map[mapY - 1][x] = 'O'; // bottom edge
-	//}
-	//for (int y = 0; y < mapY; y++)
-	//{
-	//	map[y][0] = 'O'; // left edge
-	//	map[y][mapX - 1] = 'O'; // right edge
-	//}
 }
 
 Map::Map()
