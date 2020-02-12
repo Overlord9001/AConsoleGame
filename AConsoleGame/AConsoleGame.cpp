@@ -10,8 +10,8 @@
 #include "Map.h"
 #include "Enemy.h"
 #include "Goblin.h"
-#include <Windows.h>
 #include "Lizardman.h"
+#include "Player.h"
 
 
 // usings
@@ -22,6 +22,7 @@ using namespace std;
 #define ARROW_RIGHT 0x4D
 #define ARROW_DOWN  0x50
 
+Player player = Player();
 
 int main()
 {
@@ -56,6 +57,7 @@ int main()
 	int updateEnemies = 0;
 	while (run)
 	{
+
 		// save old position
 		oldY = playerY;
 		oldX = playerX;
@@ -110,5 +112,35 @@ int main()
 			}
 			updateEnemies = false;
 		}
+
+#pragma region DrawingStats
+
+		map->SetCursorPosition(0, MAPY + 2);
+
+		std::cout << "Gold:" << player.gold;
+
+		map->SetCursorPosition(20, MAPY + 2);
+
+		std::cout << "Armor:" << player.armor;
+
+		map->SetCursorPosition(40, MAPY + 2);
+
+		std::cout << "Health:" << player.health;
+
+		map->SetCursorPosition(0, MAPY + 4);
+
+		std::cout << "AVG DMG:" << (int)(player.damage);
+			
+		map->SetCursorPosition(20, MAPY + 4);
+
+		std::cout << "MIN DMG:" << (int)(player.damage * 0.75);
+
+		map->SetCursorPosition(40, MAPY + 4);
+
+		std::cout << "MAX DMG:" << (int)(player.damage * 1.25);
+
+		map->SetCursorPosition(0,0);
+
+#pragma endregion
 	}
 }
