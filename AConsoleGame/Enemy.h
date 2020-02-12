@@ -1,22 +1,24 @@
 #pragma once
-
 #include <string>
+#include "Player.h"
+
 
 using namespace std;
 
+class Player;
 class Enemy
 {
 public:
-	int hitPoint;
-	int damage;
-	int armorClass;
-	int speed;
+	int currentHealth = 100;
+	int maxHealth = 100;
+	int damage = 10;
+	int armor = 5;
 	int x;
 	int y;
 
 	virtual void Move();
 	void UseItem();
-	void Attack();
+	void Attack(Player * player);
 
 	Enemy(int hitPoint, int damage, int armorClass, int speed);
 	Enemy();
