@@ -4,5 +4,7 @@ class Orc
 {
 public:
 	void Rage();
+
+	Orc();
 };
 

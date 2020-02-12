@@ -3,3 +3,7 @@
 void Orc::Rage()
 {
 }
+
+Orc::Orc()
+{
+}

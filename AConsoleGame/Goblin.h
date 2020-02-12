@@ -4,6 +4,8 @@ class Goblin
 {
 public:
 	void Backstab();
+	
+	Goblin();
 
 };
 

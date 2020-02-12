@@ -3,3 +3,7 @@
 void Lizardman::SpearThrow()
 {
 }
+
+Lizardman::Lizardman()
+{
+}

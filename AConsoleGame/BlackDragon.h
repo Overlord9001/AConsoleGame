@@ -4,5 +4,7 @@ class BlackDragon
 {
 public:
 	void BreathAttack();
+
+	BlackDragon();
 };
 

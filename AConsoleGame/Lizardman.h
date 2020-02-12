@@ -4,5 +4,7 @@ class Lizardman
 {
 public:
 	void SpearThrow();
+
+	Lizardman();
 };
 

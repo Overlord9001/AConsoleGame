@@ -3,3 +3,7 @@
 void Goblin::Backstab()
 {
 }
+
+Goblin::Goblin()
+{
+}
