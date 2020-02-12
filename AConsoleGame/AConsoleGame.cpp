@@ -6,11 +6,11 @@
 #include <Windows.h>
 #include <vector> 
 #include <typeinfo>
+#include <Windows.h>
 
 #include "Map.h"
 #include "Enemy.h"
 #include "Goblin.h"
-#include <Windows.h>
 #include "Lizardman.h"
 
 
@@ -21,6 +21,7 @@ using namespace std;
 #define ARROW_LEFT  0x4B
 #define ARROW_RIGHT 0x4D
 #define ARROW_DOWN  0x50
+
 
 
 int main()
@@ -40,21 +41,14 @@ int main()
 	int playerY = 5;
 	int oldX = 0;
 	int oldY = 0;
-	map->map[playerY][playerX] = 'M';
+	map->map[playerY][playerX] = PLAYER;
 	map->map[15][15] = 'E';
 	bool run = true;
 
-	for (int y = 0; y < MAPY; y++)
-	{
-		for (int x = 0; x < MAPX; x++)
-		{
-			cout << map->map[y][x] << " ";
-		}
-		cout << endl;
-	}
+	map->DrawMap();
 	
 	int updateEnemies = 0;
-	while (run)
+	while (run) // game loop
 	{
 		// save old position
 		oldY = playerY;
@@ -96,10 +90,12 @@ int main()
 						Goblin * r = (Goblin*)enemy;
 				}
 			}
+
+			map->Move(oldX, oldY, playerX, playerY, PLAYER);
 		}
 		else // if not a wall or enemy
 		{
-			map->Move(oldX, oldY, playerX, playerY, 'M');
+			map->Move(oldX, oldY, playerX, playerY, PLAYER);
 		}
 
 		if (updateEnemies >= 2) // time between the enemies move. So the player can catch them.

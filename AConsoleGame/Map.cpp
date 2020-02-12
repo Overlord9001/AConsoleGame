@@ -3,6 +3,7 @@
 #include <iostream>
 using namespace std;
 
+
 static const HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 Map* Map::instance = 0; // set the instance pointer to null 
 
@@ -23,18 +24,18 @@ void Map::SetCursorPosition(int x, int y)
 	SetConsoleCursorPosition(hOut, coord);
 }
 
-// update the visuals
+// update the visuals when a character moves
 void Map::Move(int oldX, int oldY, int newX, int newY, char icon)
 {
 	// set the old pos to empty
 	SetCursorPosition(oldX * 2, oldY); // *2 because of the spacing between when drawing
-	cout << ".";
+	cout << " ";
 
 	// choose a correct color
 	switch (icon)
 	{
-	case 'M': // player
-		SetConsoleTextAttribute(hOut, 10); // green
+	case PLAYER: // player
+		SetConsoleTextAttribute(hOut, PLAYERCOLOR); // green
 		break;
 	case 'E': // enemy
 		SetConsoleTextAttribute(hOut, 4); // red
@@ -50,7 +51,7 @@ void Map::Move(int oldX, int oldY, int newX, int newY, char icon)
 	SetConsoleTextAttribute(hOut, 15);
 
 	// update the array
-	map[oldY][oldX] = '.';
+	map[oldY][oldX] = ' ';
 	map[newY][newX] = icon;
 }
 
@@ -67,10 +68,38 @@ void Map::MapSetup(int mapX, int mapY)
 			}
 			else
 			{
-				map[y][x] = '.';
+				map[y][x] = ' ';
 			}
 		}
 	}
+}
+
+// draw the map
+void Map::DrawMap()
+{
+	for (int y = 0; y < MAPY; y++)
+	{
+		for (int x = 0; x < MAPX; x++)
+		{
+			switch (map[y][x]) // draw with the correct color
+			{
+			case PLAYER:
+				SetConsoleTextAttribute(hOut, PLAYERCOLOR);
+				break;
+			case GOBLIN:
+
+				break;
+			}
+			cout << map[y][x] << " ";
+
+			SetConsoleTextAttribute(hOut, 15); // set color back to white
+		}
+		cout << endl;
+	}
+}
+
+Map::~Map()
+{
 }
 
 Map::Map()
