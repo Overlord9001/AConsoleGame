@@ -28,7 +28,7 @@ Player player = Player();
 Enemy enemy = Enemy();
 Player * playerPTR = &player;
 Enemy * enemyPTR = &enemy;
-int state = 1;
+int state = 0;
 
 
 int main()
@@ -150,7 +150,7 @@ int main()
 		}
 
 		//Combat state
-		if (state = 1)
+		if (state == 1)
 		{
 			player.Attack(enemyPTR);
 			Sleep(2000);
