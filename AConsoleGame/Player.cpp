@@ -1,12 +1,13 @@
 #include <iostream>
 #include "Player.h"
 #include "Enemy.h"
+#include <time.h>
 
-int tempRandom = rand() % 51 + 1;
+
 
 void Player::Attack(Enemy * enemy)
 {
-
+	float tempRandom =  rand()% 51 + 1;
 	//To get from 75% damage to 125% damage randomly
 	int currentDamage = (int)(damage *(0.75 + (tempRandom / 100) - 0.01));
 
@@ -14,7 +15,7 @@ void Player::Attack(Enemy * enemy)
 	{
 		enemy->currentHealth -= (currentDamage - enemy->armor);
 		std::cout << "You strike for " << (currentDamage - enemy->armor) << " damage \n";
-		std::cout << "Enemy has " << enemy->currentHealth << " health left \n";
+		std::cout << "Enemy has " << enemy->currentHealth << " health left \n \n";
 	}
 
 	else

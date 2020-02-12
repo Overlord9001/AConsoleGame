@@ -6,6 +6,7 @@
 #include <Windows.h>
 #include <vector> 
 #include <typeinfo>
+#include <time.h>
 
 #include "Map.h"
 #include "Enemy.h"
@@ -30,6 +31,7 @@ int state = 1;
 
 int main()
 {
+	srand(static_cast<int>(time(0)));
 	//Window top left fullscreen
 	HWND console = GetConsoleWindow();
 	MoveWindow(console, 0, 0, 1920, 1080, TRUE);
