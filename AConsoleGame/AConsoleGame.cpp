@@ -6,6 +6,7 @@
 #include <Windows.h>
 #include <vector> 
 #include <typeinfo>
+#include <Windows.h>
 #include <time.h>
 
 #include "Map.h"
@@ -29,6 +30,7 @@ Player * playerPTR = &player;
 Enemy * enemyPTR = &enemy;
 int state = 1;
 
+
 int main()
 {
 	srand(static_cast<int>(time(0)));
@@ -47,22 +49,14 @@ int main()
 	int playerY = 5;
 	int oldX = 0;
 	int oldY = 0;
-	map->map[playerY][playerX] = 'M';
+	map->map[playerY][playerX] = PLAYER;
 	map->map[15][15] = 'E';
 	bool run = true;
 
-	for (int y = 0; y < MAPY; y++)
-	{
-		for (int x = 0; x < MAPX; x++)
-		{
-			cout << map->map[y][x] << " ";
-		}
-		cout << endl;
-	}
+	map->DrawMap();
 	
 	int updateEnemies = 0;
-
-	while (run)
+	while (run) // game loop
 	{
 		//World roam state
 		if (state == 0)
@@ -91,27 +85,29 @@ int main()
 				break;
 			}
 
-			if (map->map[playerY][playerX] == 'O') // if moving into a wall
+		if (map->map[playerY][playerX] == 'O') // if moving into a wall
+		{
+			playerY = oldY;
+			playerX = oldX;
+		}
+		else if (map->map[playerY][playerX] == 'E') // if moving onto an enemy
+		{
+			for (Enemy* enemy : enemies)
 			{
-				playerY = oldY;
-				playerX = oldX;
-			}
-			else if (map->map[playerY][playerX] == 'E') // if moving onto an enemy
-			{
-				for (Enemy* enemy : enemies)
+				if (enemy->x == playerX && enemy->y == playerY)
 				{
-					if (enemy->x == playerX && enemy->y == playerY)
-					{
-						// begin combat
-						if (strcmp(typeid(enemy).name(), "Goblin")) // check if enemy is a goblin
-							Goblin * r = (Goblin*)enemy;
-					}
+					// begin combat
+					if (strcmp(typeid(enemy).name(), "Goblin")) // check if enemy is a goblin
+						Goblin * r = (Goblin*)enemy;
 				}
 			}
-			else // if not a wall or enemy
-			{
-				map->Move(oldX, oldY, playerX, playerY, 'M');
-			}
+
+			map->Move(oldX, oldY, playerX, playerY, PLAYER);
+		}
+		else // if not a wall or enemy
+		{
+			map->Move(oldX, oldY, playerX, playerY, PLAYER);
+		}
 
 			if (updateEnemies >= 2) // time between the enemies move. So the player can catch them.
 			{
