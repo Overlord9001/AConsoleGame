@@ -1,6 +1,7 @@
 #pragma once
 #include "Enemy.h"
-class Lizardman
+
+class Lizardman : public Enemy
 {
 public:
 	void SpearThrow();

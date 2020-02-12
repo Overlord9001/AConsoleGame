@@ -2,41 +2,37 @@
 #include "Map.h"
 
 Map* map = Map::Instance();
-int playerX = 15;
-int playerY = 15;
-int oldX = 0;
-int oldY = 0;
 
 void Enemy::Move()
 {
-	oldY = playerY;
-	oldX = playerX;
+	int oldY = y;
+	int oldX = x;
 	int r = rand() % 4;
 	switch (r)
 	{
 	case 0:
-		playerX++;
+		x++;
 		break;
 	case 1:
-		playerX--;
+		x--;
 		break;
 	case 2:
-		playerY++;
+		y++;
 		break;
 	case 3:
-		playerY--;
+		y--;
 		break;
 	}
 
-	if(map->map[playerY][playerX] != 'O')
+	if(map->map[y][x] != 'O')
 	{
-		map->Move(oldX, oldY, playerX, playerY, 'E');
+		map->Move(oldX, oldY, x, y, 'E');
 	}
 	else // if trying to move into a wall
 	{
-		playerY = oldY;
-		playerX = oldX;
-		Move();
+		y = oldY;
+		x = oldX;
+		//Move();
 	}
 }
 
@@ -49,5 +45,12 @@ void Enemy::Attack()
 }
 
 Enemy::Enemy(int hitPoint, int damage, int armorClass, int speed)
+{
+	x = 15;
+	y = 15;
+
+}
+
+Enemy::Enemy()
 {
 }

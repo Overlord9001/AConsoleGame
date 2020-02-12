@@ -1,12 +1,18 @@
 
 // includes
 #include <iostream>
+#include <string>
 #include <conio.h>
 #include <Windows.h>
 #include <vector> 
+#include <typeinfo>
 
 #include "Map.h"
 #include "Enemy.h"
+#include "Goblin.h"
+#include <Windows.h>
+#include "Lizardman.h"
+
 
 // usings
 using namespace std;
@@ -19,11 +25,14 @@ using namespace std;
 
 int main()
 {
-	
+	//Window top left fullscreen
+	HWND console = GetConsoleWindow();
+	MoveWindow(console, 0, 0, 1920, 1080, TRUE);
+
 	Map* map = Map::Instance();
 	
-	vector<Enemy> enemies;
-	enemies.push_back(Enemy(10, 10, 10, 10));
+	vector<Enemy*> enemies;
+	enemies.push_back(new Goblin(10, 10, 10, 10));
 	
 	map->MapSetup(MAPX, MAPY);
 
@@ -44,30 +53,30 @@ int main()
 		cout << endl;
 	}
 	
-	bool updateEnemies = false;
+	int updateEnemies = 0;
 	while (run)
 	{
 		// save old position
 		oldY = playerY;
 		oldX = playerX;
 
-		switch (_getch())
+		switch (_getch()) // get arrow keys input
 		{
 		case ARROW_UP:
 			playerY--;
-			updateEnemies = true;
+			updateEnemies++;
 			break;
 		case ARROW_DOWN:
 			playerY++;
-			updateEnemies = true;
+			updateEnemies++;
 			break;
 		case ARROW_RIGHT:
 			playerX++;
-			updateEnemies = true;
+			updateEnemies++;
 			break;
 		case ARROW_LEFT:
 			playerX--;
-			updateEnemies = true;
+			updateEnemies++;
 			break;
 		}
 
@@ -78,12 +87,13 @@ int main()
 		}
 		else if (map->map[playerY][playerX] == 'E') // if moving onto an enemy
 		{
-			for (Enemy enemy : enemies)
+			for (Enemy* enemy : enemies)
 			{
-				if (enemy.x == playerX && enemy.y == playerY)
+				if (enemy->x == playerX && enemy->y == playerY)
 				{
 					// begin combat
-					enemy.
+					if (strcmp(typeid(enemy).name(), "Goblin")) // check if enemy is a goblin
+						Goblin * r = (Goblin*)enemy;
 				}
 			}
 		}
@@ -92,11 +102,11 @@ int main()
 			map->Move(oldX, oldY, playerX, playerY, 'M');
 		}
 
-		if (updateEnemies)
+		if (updateEnemies >= 2) // time between the enemies move. So the player can catch them.
 		{
-			for (Enemy enemy : enemies)
+			for (Enemy * enemy : enemies)
 			{
-				enemy.Move();
+				enemy->Move();
 			}
 			updateEnemies = false;
 		}
