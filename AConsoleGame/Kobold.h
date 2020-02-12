@@ -4,5 +4,7 @@ class Kobold
 {
 public:
 	void SlingShot();
+
+	Kobold();
 };
 

@@ -6,5 +6,6 @@ class Lizardman : public Enemy
 public:
 	void SpearThrow();
 
+	Lizardman();
 };
 

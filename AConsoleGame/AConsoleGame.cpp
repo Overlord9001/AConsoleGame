@@ -5,6 +5,7 @@
 #include <conio.h>
 #include <Windows.h>
 #include <vector> 
+#include <typeinfo>
 
 #include "Map.h"
 #include "Enemy.h"
@@ -61,7 +62,7 @@ int main()
 		oldY = playerY;
 		oldX = playerX;
 
-		switch (_getch())
+		switch (_getch()) // get arrow keys input
 		{
 		case ARROW_UP:
 			playerY--;
@@ -93,7 +94,8 @@ int main()
 				if (enemy->x == playerX && enemy->y == playerY)
 				{
 					// begin combat
-					Goblin * g = dynamic_cast<Goblin*>(enemy);
+					if (strcmp(typeid(enemy).name(), "Goblin")) // check if enemy is a goblin
+						Goblin * r = (Goblin*)enemy;
 				}
 			}
 		}
@@ -102,7 +104,7 @@ int main()
 			map->Move(oldX, oldY, playerX, playerY, 'M');
 		}
 
-		if (updateEnemies >= 2)
+		if (updateEnemies >= 2) // time between the enemies move. So the player can catch them.
 		{
 			for (Enemy * enemy : enemies)
 			{

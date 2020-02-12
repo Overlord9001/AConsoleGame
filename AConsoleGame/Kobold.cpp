@@ -4,3 +4,7 @@
 void Kobold::SlingShot()
 {
 }
+
+Kobold::Kobold()
+{
+}
