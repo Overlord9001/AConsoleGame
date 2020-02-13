@@ -35,25 +35,25 @@ void Map::Move(int oldX, int oldY, int newX, int newY, char icon)
 	switch (icon)
 	{
 	case PLAYER: // player
-		SetConsoleTextAttribute(hOut, PLAYERCOLOR); // green
+		SetConsoleTextAttribute(hOut, PLAYERCOLOR); // blue
 		break;
 	case 'E': // enemy
-		SetConsoleTextAttribute(hOut, 4); // red
+		SetConsoleTextAttribute(hOut, 4); // deep red
 		break;
 	case GOBLIN:
-		SetConsoleTextAttribute(hOut, GOBLINCOLOR);
+		SetConsoleTextAttribute(hOut, GOBLINCOLOR); // green
 		break;
 	case KOBOLD:
-		SetConsoleTextAttribute(hOut, KOBOLDCOLOR);
+		SetConsoleTextAttribute(hOut, KOBOLDCOLOR); // red
 		break;
 	case LIZARDMAN:
-		SetConsoleTextAttribute(hOut, LIZARDMANCOLOR);
+		SetConsoleTextAttribute(hOut, LIZARDMANCOLOR); // turqoise
 		break;
 	case ORC:
-		SetConsoleTextAttribute(hOut, ORCCOLOR);
+		SetConsoleTextAttribute(hOut, ORCCOLOR); // yellow
 		break;
 	case BLACKDRAGON:
-		SetConsoleTextAttribute(hOut, BLACKDRAGONCOLOR);
+		SetConsoleTextAttribute(hOut, BLACKDRAGONCOLOR); // purple
 		break;
 	}
 

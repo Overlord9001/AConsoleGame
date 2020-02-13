@@ -37,9 +37,10 @@ int state = 0;
 int main()
 {
 	srand(static_cast<int>(time(0)));
-	//Window top left fullscreen
+
+	//Window fullscreen
 	HWND console = GetConsoleWindow();
-	MoveWindow(console, 0, 0, 1920, 1080, TRUE);
+	ShowWindow(console, SW_SHOWMAXIMIZED);
 
 	Map* map = Map::Instance();
 	
