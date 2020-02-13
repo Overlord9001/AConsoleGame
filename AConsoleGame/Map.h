@@ -6,6 +6,14 @@
 #define PLAYERCOLOR 9 // blue
 #define GOBLIN 'G'
 #define GOBLINCOLOR 10 // green
+#define KOBOLD 'K'
+#define KOBOLDCOLOR 12 // red
+#define LIZARDMAN 'L'
+#define LIZARDMANCOLOR 11 // turquoise
+#define ORC 'O'
+#define ORCCOLOR 14 // yellow
+#define BLACKDRAGON 'B'
+#define BLACKDRAGONCOLOR 5 // purple
 
 
 class Map

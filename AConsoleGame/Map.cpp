@@ -1,4 +1,4 @@
-#include "Map.h"
+﻿#include "Map.h"
 #include <Windows.h>
 #include <iostream>
 using namespace std;
@@ -40,6 +40,21 @@ void Map::Move(int oldX, int oldY, int newX, int newY, char icon)
 	case 'E': // enemy
 		SetConsoleTextAttribute(hOut, 4); // red
 		break;
+	case GOBLIN:
+		SetConsoleTextAttribute(hOut, GOBLINCOLOR);
+		break;
+	case KOBOLD:
+		SetConsoleTextAttribute(hOut, KOBOLDCOLOR);
+		break;
+	case LIZARDMAN:
+		SetConsoleTextAttribute(hOut, LIZARDMANCOLOR);
+		break;
+	case ORC:
+		SetConsoleTextAttribute(hOut, ORCCOLOR);
+		break;
+	case BLACKDRAGON:
+		SetConsoleTextAttribute(hOut, BLACKDRAGONCOLOR);
+		break;
 	}
 
 	// draw the new position 
@@ -64,13 +79,13 @@ void Map::MapSetup(int mapX, int mapY)
 		{
 			if (x == 0 || x == mapX - 1 || y == 0 || y == mapY - 1)
 			{
-				map[y][x] = 'O';
+				map[y][x] = '#';
 			}
 			else
 			{
 				map[y][x] = ' ';
 			}
-		}
+		} 	
 	}
 }
 
@@ -87,7 +102,19 @@ void Map::DrawMap()
 				SetConsoleTextAttribute(hOut, PLAYERCOLOR);
 				break;
 			case GOBLIN:
-
+				SetConsoleTextAttribute(hOut, GOBLINCOLOR);
+				break;
+			case KOBOLD:
+				SetConsoleTextAttribute(hOut, KOBOLDCOLOR);
+				break;
+			case LIZARDMAN:
+				SetConsoleTextAttribute(hOut, LIZARDMANCOLOR);
+				break;
+			case ORC:
+				SetConsoleTextAttribute(hOut, ORCCOLOR);
+				break;
+			case BLACKDRAGON:
+				SetConsoleTextAttribute(hOut, BLACKDRAGONCOLOR);
 				break;
 			}
 			cout << map[y][x] << " ";

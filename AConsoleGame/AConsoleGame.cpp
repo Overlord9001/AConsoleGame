@@ -13,6 +13,9 @@
 #include "Enemy.h"
 #include "Goblin.h"
 #include "Lizardman.h"
+#include "Kobold.h"
+#include "Orc.h"
+#include "BlackDragon.h"
 #include "Player.h"
 
 
@@ -42,6 +45,10 @@ int main()
 	
 	vector<Enemy*> enemies;
 	enemies.push_back(new Goblin(10, 10, 10, 10));
+	enemies.push_back(new Kobold(10, 10, 10, 10));
+	enemies.push_back(new Lizardman(10, 10, 10, 10));
+	enemies.push_back(new Orc(10, 10, 10, 10));
+	enemies.push_back(new BlackDragon(10, 10, 10, 10));
 	
 	map->MapSetup(MAPX, MAPY);
 
@@ -85,7 +92,7 @@ int main()
 				break;
 			}
 
-		if (map->map[playerY][playerX] == 'O') // if moving into a wall
+		if (map->map[playerY][playerX] == '#') // if moving into a wall
 		{
 			playerY = oldY;
 			playerX = oldX;

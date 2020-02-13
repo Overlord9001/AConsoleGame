@@ -28,9 +28,9 @@ void Enemy::Move()
 		break;
 	}
 
-	if(map->map[y][x] != 'O')
+	if(map->map[y][x] != '#')
 	{
-		map->Move(oldX, oldY, x, y, 'E');
+		map->Move(oldX, oldY, x, y, icon);
 	}
 	else // if trying to move into a wall
 	{
