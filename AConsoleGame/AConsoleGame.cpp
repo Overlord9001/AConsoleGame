@@ -8,6 +8,7 @@
 #include <typeinfo>
 #include <Windows.h>
 #include <time.h>
+#include <irrKlang.h>
 
 #include "Map.h"
 #include "Enemy.h"
@@ -21,6 +22,7 @@
 
 // usings
 using namespace std;
+using namespace irrklang;
 
 #define ARROW_UP    0x48
 #define ARROW_LEFT  0x4B
@@ -64,6 +66,9 @@ int main()
 
 	map->MapSetup(MAPX, MAPY);
 
+	ISoundEngine * soundEngine = createIrrKlangDevice();
+	soundEngine->play2D("bgMusic.wav");
+	system("cls");
 	
 	enemies.push_back(new Goblin(10, 10, 10, 10));
 	enemies.push_back(new Kobold(10, 10, 10, 10));
@@ -79,6 +84,8 @@ int main()
 
 	map->DrawMap();
 	
+	
+
 	int updateEnemies = 0;
 	while (run) // game loop
 	{
