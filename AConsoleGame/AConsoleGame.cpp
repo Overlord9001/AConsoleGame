@@ -72,8 +72,6 @@ int main()
 	enemies.push_back(new BlackDragon(10, 10, 10, 10));
 	
 	
-
-	
 	int oldX = 0;
 	int oldY = 0;
 	map->map[player->y][player->x] = PLAYER;

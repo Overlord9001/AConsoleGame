@@ -18,14 +18,18 @@ void Goblin::Move()
 	{
 	case 0:
 		x++;
+		y++;
 		break;
 	case 1:
-		x--;
+		x++;
+		y--;
 		break;
 	case 2:
+		x--;
 		y++;
 		break;
 	case 3:
+		x--;
 		y--;
 		break;
 	}

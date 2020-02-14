@@ -25,6 +25,8 @@ public:
 	void Move(int oldX, int oldY, int newX, int newY, char icon);
 	void MapSetup(int mapX, int mapY);
 	void DrawMap();
+	int playerX = 5;
+	int playerY = 5;
 	~Map();
 
 private:
