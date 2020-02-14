@@ -74,7 +74,7 @@ int main()
 	
 	int oldX = 0;
 	int oldY = 0;
-	map->map[player->y][player->x] = PLAYER;
+	map->map[playerY][playerX] = PLAYER;
 	bool run = true;
 
 	map->DrawMap();
@@ -86,50 +86,50 @@ int main()
 		if (state == 0)
 		{
 			// save old position
-			oldY = player->y;
-			oldX = player->x;
+			oldY = playerY;
+			oldX = playerX;
 
 			switch (_getch()) // get arrow keys input
 			{
 			case ARROW_UP:
-				player->y--;
+				playerY--;
 				updateEnemies++;
 				break;
 			case ARROW_DOWN:
-				player->y++;
+				playerY++;
 				updateEnemies++;
 				break;
 			case ARROW_RIGHT:
-				player->x++;
+				playerX++;
 				updateEnemies++;
 				break;
 			case ARROW_LEFT:
-				player->x--;
+				playerX--;
 				updateEnemies++;
 				break;
 			}
 
-		if (map->map[player->y][player->x] == '#') // if moving into a wall
+		if (map->map[playerY][playerX] == '#') // if moving into a wall
 		{
-			player->y = oldY;
-			player->x = oldX;
+			playerY = oldY;
+			playerX = oldX;
 		}
-		else if (map->map[player->x][player->x] != 'O' && map->map[player->y][player->x] != ' ') // if moving onto an enemy
+		else if (map->map[playerY][playerX] != 'O' && map->map[playerY][playerX] != ' ') // if moving onto an enemy
 		{
 			for (Enemy* enemy : enemies)
 			{
-				if (enemy->x == player->x && enemy->y == player->y)
+				if (enemy->x == playerX && enemy->y == playerY)
 				{
 					// begin combat
 					Combat(player, enemy);
 				}
 			}
 
-			map->Move(oldX, oldY, player->x, player->y, PLAYER); // move after combat
+			map->Move(oldX, oldY, playerX, playerY, PLAYER); // move after combat
 		}
 		else // if not a wall or enemy
 		{
-			map->Move(oldX, oldY, player->x, player->y, PLAYER);
+			map->Move(oldX, oldY, playerX, playerY, PLAYER);
 		}
 
 			if (updateEnemies >= 2) // time between the enemies move. So the player can catch them.
