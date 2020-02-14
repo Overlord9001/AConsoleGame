@@ -11,12 +11,18 @@ public:
 	int currentHealth = 100;
 	int armor = 5;
 	bool item = true;
+	int x;
+	int y;
 
+	static Player * Instance();
 	void Attack(Enemy * enemy);
 	void SpecialMove(Enemy * enemy);
 	void UseItem();
 
-	Player();
 	~Player();
+
+private:
+	static Player * instance;
+	Player();
 };
 

@@ -28,7 +28,7 @@ void Enemy::Move()
 		break;
 	}
 
-	if(map->map[y][x] != '#')
+	if(map->map[y][x] == ' ')
 	{
 		map->Move(oldX, oldY, x, y, icon);
 	}
@@ -36,7 +36,6 @@ void Enemy::Move()
 	{
 		y = oldY;
 		x = oldX;
-		//Move();
 	}
 }
 

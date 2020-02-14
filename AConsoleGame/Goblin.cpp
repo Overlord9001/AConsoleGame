@@ -29,8 +29,27 @@ void Goblin::Move()
 		y--;
 		break;
 	}
+	
+	Player* player = Player::Instance();
 
-	if (map->map[y][x] != ' ')
+	if (player->y < y)
+	{
+		y--;
+	}
+	else if (player->y > y)
+	{
+		y++;
+	}
+	else if (player->x < x)
+	{
+		x--;
+	}
+	else if (player->x > x)
+	{
+		x++;
+	}
+
+	if (map->map[y][x] == ' ')
 	{
 		map->Move(oldX, oldY, x, y, GOBLIN);
 	}

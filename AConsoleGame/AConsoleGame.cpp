@@ -27,9 +27,8 @@ using namespace std;
 #define ARROW_RIGHT 0x4D
 #define ARROW_DOWN  0x50
 
-Player player = Player();
 Enemy enemy = Enemy();
-Player * playerPTR = &player;
+Player * player = Player::Instance();
 Enemy * enemyPTR = &enemy;
 int state = 0;
 vector<Enemy*> enemies;
@@ -74,11 +73,10 @@ int main()
 	
 	
 
-	int playerX = 5;
-	int playerY = 5;
+	
 	int oldX = 0;
 	int oldY = 0;
-	map->map[playerY][playerX] = PLAYER;
+	map->map[player->y][player->x] = PLAYER;
 	bool run = true;
 
 	map->DrawMap();
@@ -90,50 +88,50 @@ int main()
 		if (state == 0)
 		{
 			// save old position
-			oldY = playerY;
-			oldX = playerX;
+			oldY = player->y;
+			oldX = player->x;
 
 			switch (_getch()) // get arrow keys input
 			{
 			case ARROW_UP:
-				playerY--;
+				player->y--;
 				updateEnemies++;
 				break;
 			case ARROW_DOWN:
-				playerY++;
+				player->y++;
 				updateEnemies++;
 				break;
 			case ARROW_RIGHT:
-				playerX++;
+				player->x++;
 				updateEnemies++;
 				break;
 			case ARROW_LEFT:
-				playerX--;
+				player->x--;
 				updateEnemies++;
 				break;
 			}
 
-		if (map->map[playerY][playerX] == '#') // if moving into a wall
+		if (map->map[player->y][player->x] == '#') // if moving into a wall
 		{
-			playerY = oldY;
-			playerX = oldX;
+			player->y = oldY;
+			player->x = oldX;
 		}
-		else if (map->map[playerY][playerX] != 'O' && map->map[playerY][playerX] != ' ') // if moving onto an enemy
+		else if (map->map[player->x][player->x] != 'O' && map->map[player->y][player->x] != ' ') // if moving onto an enemy
 		{
 			for (Enemy* enemy : enemies)
 			{
-				if (enemy->x == playerX && enemy->y == playerY)
+				if (enemy->x == player->x && enemy->y == player->y)
 				{
 					// begin combat
-					Combat(playerPTR, enemy);
+					Combat(player, enemy);
 				}
 			}
 
-			map->Move(oldX, oldY, playerX, playerY, PLAYER); // move after combat
+			map->Move(oldX, oldY, player->x, player->y, PLAYER); // move after combat
 		}
 		else // if not a wall or enemy
 		{
-			map->Move(oldX, oldY, playerX, playerY, PLAYER);
+			map->Move(oldX, oldY, player->x, player->y, PLAYER);
 		}
 
 			if (updateEnemies >= 2) // time between the enemies move. So the player can catch them.
@@ -149,27 +147,27 @@ int main()
 
 			map->SetCursorPosition(0, MAPY + 2);
 
-			std::cout << "Gold:" << player.gold;
+			std::cout << "Gold:" << player->gold;
 
 			map->SetCursorPosition(20, MAPY + 2);
 
-			std::cout << "Armor:" << player.armor;
+			std::cout << "Armor:" << player->armor;
 
 			map->SetCursorPosition(40, MAPY + 2);
 
-			std::cout << "Health:" << player.currentHealth;
+			std::cout << "Health:" << player->currentHealth;
 
 			map->SetCursorPosition(0, MAPY + 4);
 
-			std::cout << "AVG DMG:" << (int)(player.damage);
+			std::cout << "AVG DMG:" << (int)(player->damage);
 
 			map->SetCursorPosition(20, MAPY + 4);
 
-			std::cout << "MIN DMG:" << (int)(player.damage * 0.75);
+			std::cout << "MIN DMG:" << (int)(player->damage * 0.75);
 
 			map->SetCursorPosition(40, MAPY + 4);
 
-			std::cout << "MAX DMG:" << (int)(player.damage * 1.25);
+			std::cout << "MAX DMG:" << (int)(player->damage * 1.25);
 
 			map->SetCursorPosition(0, 0);
 
@@ -179,9 +177,9 @@ int main()
 		//Combat state
 		if (state == 1)
 		{
-			player.Attack(enemyPTR);
+			player->Attack(enemyPTR);
 			Sleep(2000);
-			enemy.Attack(playerPTR);
+			enemy.Attack(player);
 			Sleep(2000);
 		}
 	}
