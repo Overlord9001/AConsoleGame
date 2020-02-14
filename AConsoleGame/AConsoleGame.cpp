@@ -29,7 +29,26 @@ Enemy enemy = Enemy();
 Player * playerPTR = &player;
 Enemy * enemyPTR = &enemy;
 int state = 0;
+vector<Enemy*> enemies;
 
+
+void Combat(Player * player, Enemy * enemy)
+{
+	Goblin * r = nullptr;
+	if (strcmp(typeid(enemy).name(), "Goblin")) // check if enemy is a goblin
+		r = (Goblin*)enemy;
+
+	// test
+	enemies.erase(find(enemies.begin(), enemies.end(), enemy)); // remove from vector
+	delete r;
+	r = nullptr;
+	// test
+
+	// clear screen
+	// draw combat screen
+	// do combat
+	// draw map again
+}
 
 int main()
 {
@@ -39,18 +58,19 @@ int main()
 	MoveWindow(console, 0, 0, 1920, 1080, TRUE);
 
 	Map* map = Map::Instance();
+
+	map->MapSetup(MAPX, MAPY);
+
 	
-	vector<Enemy*> enemies;
 	enemies.push_back(new Goblin(10, 10, 10, 10));
 	
-	map->MapSetup(MAPX, MAPY);
+	
 
 	int playerX = 5;
 	int playerY = 5;
 	int oldX = 0;
 	int oldY = 0;
 	map->map[playerY][playerX] = PLAYER;
-	map->map[15][15] = 'E';
 	bool run = true;
 
 	map->DrawMap();
@@ -90,19 +110,18 @@ int main()
 			playerY = oldY;
 			playerX = oldX;
 		}
-		else if (map->map[playerY][playerX] == 'E') // if moving onto an enemy
+		else if (map->map[playerY][playerX] != 'O' && map->map[playerY][playerX] != ' ') // if moving onto an enemy
 		{
 			for (Enemy* enemy : enemies)
 			{
 				if (enemy->x == playerX && enemy->y == playerY)
 				{
 					// begin combat
-					if (strcmp(typeid(enemy).name(), "Goblin")) // check if enemy is a goblin
-						Goblin * r = (Goblin*)enemy;
+					Combat(playerPTR, enemy);
 				}
 			}
 
-			map->Move(oldX, oldY, playerX, playerY, PLAYER);
+			map->Move(oldX, oldY, playerX, playerY, PLAYER); // move after combat
 		}
 		else // if not a wall or enemy
 		{
@@ -115,7 +134,7 @@ int main()
 				{
 					enemy->Move();
 				}
-				updateEnemies = false;
+				updateEnemies = 0;
 			}
 
 #pragma region DrawingStats

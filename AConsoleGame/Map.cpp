@@ -34,11 +34,11 @@ void Map::Move(int oldX, int oldY, int newX, int newY, char icon)
 	// choose a correct color
 	switch (icon)
 	{
-	case PLAYER: // player
+	case PLAYER:
 		SetConsoleTextAttribute(hOut, PLAYERCOLOR); // green
 		break;
-	case 'E': // enemy
-		SetConsoleTextAttribute(hOut, 4); // red
+	case GOBLIN:
+		SetConsoleTextAttribute(hOut, GOBLINCOLOR); // red
 		break;
 	}
 
@@ -87,7 +87,7 @@ void Map::DrawMap()
 				SetConsoleTextAttribute(hOut, PLAYERCOLOR);
 				break;
 			case GOBLIN:
-
+				SetConsoleTextAttribute(hOut, GOBLINCOLOR);
 				break;
 			}
 			cout << map[y][x] << " ";
