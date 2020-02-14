@@ -13,19 +13,21 @@ void Orc::Move()
 	Map* map = Map::Instance();
 	int oldY = y;
 	int oldX = x;
-	if (map->playerX > x)
+	Player* player = Player::Instance();
+
+	if (player->x > x)
 	{
 		x++;
 	}
-	else if (map->playerY > y)
+	else if (player->y > y)
 	{
 		y++;
 	}
-	else if (map->playerX < x)
+	else if (player->x < x)
 	{
 		x--;
 	}
-	else if (map->playerY < y)
+	else if (player->y < y)
 	{
 		y--;
 	}

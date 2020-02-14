@@ -13,26 +13,6 @@ void Goblin::Move()
 	Map* map = Map::Instance();
 	int oldY = y;
 	int oldX = x;
-	int r = rand() % 4;
-	switch (r)
-	{
-	case 0:
-		x++;
-		y++;
-		break;
-	case 1:
-		x++;
-		y--;
-		break;
-	case 2:
-		x--;
-		y++;
-		break;
-	case 3:
-		x--;
-		y--;
-		break;
-	}
 	
 	Player* player = Player::Instance();
 
