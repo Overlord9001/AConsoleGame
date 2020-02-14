@@ -13,6 +13,9 @@
 #include "Enemy.h"
 #include "Goblin.h"
 #include "Lizardman.h"
+#include "Kobold.h"
+#include "Orc.h"
+#include "BlackDragon.h"
 #include "Player.h"
 
 
@@ -53,9 +56,10 @@ void Combat(Player * player, Enemy * enemy)
 int main()
 {
 	srand(static_cast<int>(time(0)));
-	//Window top left fullscreen
+
+	//Window fullscreen
 	HWND console = GetConsoleWindow();
-	MoveWindow(console, 0, 0, 1920, 1080, TRUE);
+	ShowWindow(console, SW_SHOWMAXIMIZED);
 
 	Map* map = Map::Instance();
 
@@ -63,6 +67,10 @@ int main()
 
 	
 	enemies.push_back(new Goblin(10, 10, 10, 10));
+	enemies.push_back(new Kobold(10, 10, 10, 10));
+	enemies.push_back(new Lizardman(10, 10, 10, 10));
+	enemies.push_back(new Orc(10, 10, 10, 10));
+	enemies.push_back(new BlackDragon(10, 10, 10, 10));
 	
 	
 
@@ -105,7 +113,7 @@ int main()
 				break;
 			}
 
-		if (map->map[playerY][playerX] == 'O') // if moving into a wall
+		if (map->map[playerY][playerX] == '#') // if moving into a wall
 		{
 			playerY = oldY;
 			playerX = oldX;
