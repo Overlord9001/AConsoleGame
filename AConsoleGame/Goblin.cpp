@@ -18,19 +18,23 @@ void Goblin::Move()
 	{
 	case 0:
 		x++;
+		y++;
 		break;
 	case 1:
-		x--;
+		x++;
+		y--;
 		break;
 	case 2:
+		x--;
 		y++;
 		break;
 	case 3:
+		x--;
 		y--;
 		break;
 	}
 
-	if (map->map[y][x] != ' ')
+	if (map->map[y][x] == ' ')
 	{
 		map->Move(oldX, oldY, x, y, GOBLIN);
 	}

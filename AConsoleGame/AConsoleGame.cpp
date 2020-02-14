@@ -73,12 +73,9 @@ int main()
 	enemies.push_back(new BlackDragon(10, 10, 10, 10));
 	
 	
-
-	int playerX = 5;
-	int playerY = 5;
 	int oldX = 0;
 	int oldY = 0;
-	map->map[playerY][playerX] = PLAYER;
+	map->map[map->playerY][map->playerX] = PLAYER;
 	bool run = true;
 
 	map->DrawMap();
@@ -90,50 +87,50 @@ int main()
 		if (state == 0)
 		{
 			// save old position
-			oldY = playerY;
-			oldX = playerX;
+			oldY = map->playerY;
+			oldX = map->playerX;
 
 			switch (_getch()) // get arrow keys input
 			{
 			case ARROW_UP:
-				playerY--;
+				map->playerY--;
 				updateEnemies++;
 				break;
 			case ARROW_DOWN:
-				playerY++;
+				map->playerY++;
 				updateEnemies++;
 				break;
 			case ARROW_RIGHT:
-				playerX++;
+				map->playerX++;
 				updateEnemies++;
 				break;
 			case ARROW_LEFT:
-				playerX--;
+				map->playerX--;
 				updateEnemies++;
 				break;
 			}
 
-		if (map->map[playerY][playerX] == '#') // if moving into a wall
+		if (map->map[map->playerY][map->playerX] == '#') // if moving into a wall
 		{
-			playerY = oldY;
-			playerX = oldX;
+			map->playerY = oldY;
+			map->playerX = oldX;
 		}
-		else if (map->map[playerY][playerX] != 'O' && map->map[playerY][playerX] != ' ') // if moving onto an enemy
+		else if (map->map[map->playerY][map->playerX] != 'O' && map->map[map->playerY][map->playerX] != ' ') // if moving onto an enemy
 		{
 			for (Enemy* enemy : enemies)
 			{
-				if (enemy->x == playerX && enemy->y == playerY)
+				if (enemy->x == map->playerX && enemy->y == map->playerY)
 				{
 					// begin combat
 					Combat(playerPTR, enemy);
 				}
 			}
 
-			map->Move(oldX, oldY, playerX, playerY, PLAYER); // move after combat
+			map->Move(oldX, oldY, map->playerX, map->playerY, PLAYER); // move after combat
 		}
 		else // if not a wall or enemy
 		{
-			map->Move(oldX, oldY, playerX, playerY, PLAYER);
+			map->Move(oldX, oldY, map->playerX, map->playerY, PLAYER);
 		}
 
 			if (updateEnemies >= 2) // time between the enemies move. So the player can catch them.
