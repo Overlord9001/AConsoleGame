@@ -3,7 +3,14 @@
 #include "Enemy.h"
 #include <time.h>
 
+Player * Player::instance = 0;
 
+Player * Player::Instance()
+{
+	if (instance == nullptr)
+		instance = new Player;
+	return instance;
+}
 
 void Player::Attack(Enemy * enemy)
 {
@@ -44,6 +51,8 @@ void Player::UseItem()
 
 Player::Player()
 {
+	x = 5;
+	y = 5;
 }
 
 Player::~Player()

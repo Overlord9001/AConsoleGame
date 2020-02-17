@@ -8,6 +8,7 @@
 #include <typeinfo>
 #include <Windows.h>
 #include <time.h>
+#include <irrKlang.h>
 
 #include "Map.h"
 #include "Enemy.h"
@@ -21,15 +22,15 @@
 
 // usings
 using namespace std;
+using namespace irrklang;
 
 #define ARROW_UP    0x48
 #define ARROW_LEFT  0x4B
 #define ARROW_RIGHT 0x4D
 #define ARROW_DOWN  0x50
 
-Player player = Player();
 Enemy enemy = Enemy();
-Player * playerPTR = &player;
+Player * player = Player::Instance();
 Enemy * enemyPTR = &enemy;
 int state = 0;
 vector<Enemy*> enemies;
@@ -37,20 +38,24 @@ vector<Enemy*> enemies;
 
 void Combat(Player * player, Enemy * enemy)
 {
+	system("cls"); // clear screen
+
 	Goblin * r = nullptr;
 	if (strcmp(typeid(enemy).name(), "Goblin")) // check if enemy is a goblin
 		r = (Goblin*)enemy;
 
 	// test
 	enemies.erase(find(enemies.begin(), enemies.end(), enemy)); // remove from vector
-	delete r;
+	delete enemy;
 	r = nullptr;
 	// test
 
-	// clear screen
+	
 	// draw combat screen
 	// do combat
-	// draw map again
+	
+
+	Map::Instance()->DrawMap(); // draw map again
 }
 
 int main()
@@ -65,6 +70,9 @@ int main()
 
 	map->MapSetup(MAPX, MAPY);
 
+	ISoundEngine * soundEngine = createIrrKlangDevice();
+	soundEngine->play2D("bgMusic.wav");
+	system("cls");
 	
 	enemies.push_back(new Goblin(10, 10, 10, 10));
 	enemies.push_back(new Kobold(10, 10, 10, 10));
@@ -75,11 +83,13 @@ int main()
 	
 	int oldX = 0;
 	int oldY = 0;
-	map->map[map->playerY][map->playerX] = PLAYER;
+	map->map[player->y][player->x] = PLAYER;
 	bool run = true;
 
 	map->DrawMap();
 	
+	
+
 	int updateEnemies = 0;
 	while (run) // game loop
 	{
@@ -87,50 +97,50 @@ int main()
 		if (state == 0)
 		{
 			// save old position
-			oldY = map->playerY;
-			oldX = map->playerX;
+			oldY = player->y;
+			oldX = player->x;
 
 			switch (_getch()) // get arrow keys input
 			{
 			case ARROW_UP:
-				map->playerY--;
+				player->y--;
 				updateEnemies++;
 				break;
 			case ARROW_DOWN:
-				map->playerY++;
+				player->y++;
 				updateEnemies++;
 				break;
 			case ARROW_RIGHT:
-				map->playerX++;
+				player->x++;
 				updateEnemies++;
 				break;
 			case ARROW_LEFT:
-				map->playerX--;
+				player->x--;
 				updateEnemies++;
 				break;
 			}
 
-		if (map->map[map->playerY][map->playerX] == '#') // if moving into a wall
+		if (map->map[player->y][player->x] == '#') // if moving into a wall
 		{
-			map->playerY = oldY;
-			map->playerX = oldX;
+			player->y = oldY;
+			player->x = oldX;
 		}
-		else if (map->map[map->playerY][map->playerX] != 'O' && map->map[map->playerY][map->playerX] != ' ') // if moving onto an enemy
+		else if (map->map[player->y][player->x] != 'O' && map->map[player->y][player->x] != ' ') // if moving onto an enemy
 		{
 			for (Enemy* enemy : enemies)
 			{
-				if (enemy->x == map->playerX && enemy->y == map->playerY)
+				if (enemy->x == player->x && enemy->y == player->y)
 				{
 					// begin combat
-					Combat(playerPTR, enemy);
+					Combat(player, enemy);
 				}
 			}
 
-			map->Move(oldX, oldY, map->playerX, map->playerY, PLAYER); // move after combat
+			map->Move(oldX, oldY, player->x, player->y, PLAYER); // move after combat
 		}
 		else // if not a wall or enemy
 		{
-			map->Move(oldX, oldY, map->playerX, map->playerY, PLAYER);
+			map->Move(oldX, oldY, player->x, player->y, PLAYER);
 		}
 
 			if (updateEnemies >= 2) // time between the enemies move. So the player can catch them.
@@ -146,27 +156,27 @@ int main()
 
 			map->SetCursorPosition(0, MAPY + 2);
 
-			std::cout << "Gold:" << player.gold;
+			std::cout << "Gold:" << player->gold;
 
 			map->SetCursorPosition(20, MAPY + 2);
 
-			std::cout << "Armor:" << player.armor;
+			std::cout << "Armor:" << player->armor;
 
 			map->SetCursorPosition(40, MAPY + 2);
 
-			std::cout << "Health:" << player.currentHealth;
+			std::cout << "Health:" << player->currentHealth;
 
 			map->SetCursorPosition(0, MAPY + 4);
 
-			std::cout << "AVG DMG:" << (int)(player.damage);
+			std::cout << "AVG DMG:" << (int)(player->damage);
 
 			map->SetCursorPosition(20, MAPY + 4);
 
-			std::cout << "MIN DMG:" << (int)(player.damage * 0.75);
+			std::cout << "MIN DMG:" << (int)(player->damage * 0.75);
 
 			map->SetCursorPosition(40, MAPY + 4);
 
-			std::cout << "MAX DMG:" << (int)(player.damage * 1.25);
+			std::cout << "MAX DMG:" << (int)(player->damage * 1.25);
 
 			map->SetCursorPosition(0, 0);
 
@@ -176,9 +186,9 @@ int main()
 		//Combat state
 		if (state == 1)
 		{
-			player.Attack(enemyPTR);
+			player->Attack(enemyPTR);
 			Sleep(2000);
-			enemy.Attack(playerPTR);
+			enemy.Attack(player);
 			Sleep(2000);
 		}
 	}

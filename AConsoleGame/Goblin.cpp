@@ -13,25 +13,24 @@ void Goblin::Move()
 	Map* map = Map::Instance();
 	int oldY = y;
 	int oldX = x;
-	int r = rand() % 4;
-	switch (r)
+	
+	Player* player = Player::Instance();
+
+	if (player->y < y)
 	{
-	case 0:
-		x++;
-		y++;
-		break;
-	case 1:
-		x++;
 		y--;
-		break;
-	case 2:
-		x--;
+	}
+	else if (player->y > y)
+	{
 		y++;
-		break;
-	case 3:
+	}
+	else if (player->x < x)
+	{
 		x--;
-		y--;
-		break;
+	}
+	else if (player->x > x)
+	{
+		x++;
 	}
 
 	if (map->map[y][x] == ' ')
