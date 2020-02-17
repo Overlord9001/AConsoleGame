@@ -40,12 +40,13 @@ void Player::UseItem()
 	if (item == true)
 	{
 		currentHealth = maxHealth;
-		std::cout << "You pull out and drink a potion regenerating your health to full";
+		std::cout << "You pull out and drink a potion regenerating your health to full\n\n";
+		item = false;
 	}
 
 	else
 	{
-		std::cout << "You have no potions";
+		std::cout << "You have no potions\n\n";
 	}
 }
 
