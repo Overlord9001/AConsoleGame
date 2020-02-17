@@ -118,6 +118,27 @@ int main()
 				player->x--;
 				updateEnemies++;
 				break;
+			case 'm': //mutes the music
+				if (soundEngine->getSoundVolume() != 0)
+				{
+					soundEngine->setSoundVolume(0);
+				}
+				else
+				{
+					soundEngine->setSoundVolume(1);
+				}
+				break;
+			case 'p': //stops / restarts the music
+				if (soundEngine->isCurrentlyPlaying("bgMusic.wav"))
+				{
+					//soundEngine->drop(); // gør at if sætningen ikke kan bruges efter man har droppet første gang.
+				}
+				else
+				{
+					/*ISoundEngine * soundEngine = createIrrKlangDevice();
+					soundEngine->play2D("bgMusic.wav");*/ // på grund af drop() ikke virker som jeg havde regnet med virker det her heller ikke.
+				}
+				break;
 			}
 
 		if (map->map[player->y][player->x] == '#') // if moving into a wall
