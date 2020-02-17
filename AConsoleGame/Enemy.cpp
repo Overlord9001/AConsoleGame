@@ -7,7 +7,7 @@ Map* map = Map::Instance();
 
 
 
-void Enemy::Move()
+bool Enemy::Move()
 {
 	int oldY = y;
 	int oldX = x;
@@ -28,7 +28,7 @@ void Enemy::Move()
 		break;
 	}
 
-	if(map->map[y][x] == ' ')
+	if(map->map[y][x] == ' ' || map->map[y][x] == PLAYER)
 	{
 		map->Move(oldX, oldY, x, y, icon);
 	}
@@ -37,6 +37,7 @@ void Enemy::Move()
 		y = oldY;
 		x = oldX;
 	}
+	return false;
 }
 
 void Enemy::UseItem()

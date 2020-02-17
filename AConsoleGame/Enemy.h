@@ -17,7 +17,7 @@ public:
 	int y;
 	char icon = 'E';
 
-	virtual void Move();
+	virtual bool Move();
 	void UseItem();
 	void Attack(Player * player);
 

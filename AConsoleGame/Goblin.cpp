@@ -6,7 +6,7 @@ void Goblin::Backstab()
 
 }
 
-void Goblin::Move()
+bool Goblin::Move()
 {
 	Map* map = Map::Instance();
 
@@ -29,7 +29,12 @@ void Goblin::Move()
 		break;
 	}
 
-	if (map->map[y][x] == ' ')
+	if (map->map[y][x] == PLAYER)
+	{
+		map->Move(oldX, oldY, x, y, GOBLIN);
+		return true;
+	}
+	else if (map->map[y][x] == ' ')
 	{
 		map->Move(oldX, oldY, x, y, icon);
 	}
@@ -38,6 +43,7 @@ void Goblin::Move()
 		y = oldY;
 		x = oldX;
 	}
+	return false;
 }
 
 Goblin::Goblin(int hitPoint, int damage, int armorClass, int speed) : Enemy (hitPoint, damage, armorClass, speed)

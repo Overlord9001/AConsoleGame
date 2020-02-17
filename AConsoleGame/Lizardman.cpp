@@ -7,7 +7,7 @@ void Lizardman::SpearThrow()
 	
 }
 
-void Lizardman::Move()
+bool Lizardman::Move()
 {
 	Map* map = Map::Instance();
 

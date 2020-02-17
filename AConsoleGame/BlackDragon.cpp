@@ -5,7 +5,7 @@ void BlackDragon::BreathAttack()
 {
 }
 
-void BlackDragon::Move()
+bool BlackDragon::Move()
 {
 	Map* map = Map::Instance();
 
