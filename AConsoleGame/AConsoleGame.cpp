@@ -168,12 +168,12 @@ int main()
 			case 'p': //stops / restarts the music
 				if (soundEngine->isCurrentlyPlaying("bgMusic.wav"))
 				{
-					//soundEngine->drop(); // gør at if sætningen ikke kan bruges efter man har droppet første gang.
+					soundEngine->removeAllSoundSources(); // gør at if sætningen ikke kan bruges efter man har droppet første gang.
 				}
 				else
 				{
-					/*ISoundEngine * soundEngine = createIrrKlangDevice();
-					soundEngine->play2D("bgMusic.wav");*/ // på grund af drop() ikke virker som jeg havde regnet med virker det her heller ikke.
+					//ISoundEngine * soundEngine = createIrrKlangDevice();
+					soundEngine->play2D("bgMusic.wav"); // på grund af drop() ikke virker som jeg havde regnet med virker det her heller ikke.
 				}
 				break;
 			}
