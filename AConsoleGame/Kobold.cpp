@@ -11,6 +11,7 @@ void Kobold::SlingShot()
 bool Kobold::Move()
 {
 	Map* map = Map::Instance();
+
 	int oldY = y;
 	int oldX = x;
 	int r = rand() % 2;
@@ -56,7 +57,7 @@ bool Kobold::Move()
 
 Kobold::Kobold(int hitPoint, int damage, int armorClass, int speed) : Enemy (hitPoint, damage, armorClass, speed)
 {
-	icon = 'K';
+	icon = KOBOLD;
 }
 
 Kobold::Kobold()
