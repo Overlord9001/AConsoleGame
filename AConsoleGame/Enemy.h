@@ -17,7 +17,7 @@ public:
 	int y;
 	char icon = 'E';
 
-	virtual bool Move();
+	virtual bool Move(); // return true if moving into the player to begin combat
 	void UseItem();
 	void Attack(Player * player);
 
