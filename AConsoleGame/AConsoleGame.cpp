@@ -34,25 +34,66 @@ Player * player = Player::Instance();
 Enemy * enemyPTR = &enemy;
 int state = 0;
 vector<Enemy*> enemies;
+bool enemyAlive = false;
+bool playerTurn = true;
 
 
 void Combat(Player * player, Enemy * enemy)
 {
 	system("cls"); // clear screen
 
-	Goblin * r = nullptr;
-	if (strcmp(typeid(enemy).name(), "Goblin")) // check if enemy is a goblin
-		r = (Goblin*)enemy;
+	while (enemyAlive)
+	{
+		Goblin * r = nullptr;
+		if (strcmp(typeid(enemy).name(), "Goblin")) // check if enemy is a goblin
+			r = (Goblin*)enemy;
 
-	// test
-	enemies.erase(find(enemies.begin(), enemies.end(), enemy)); // remove from vector
-	delete enemy;
-	r = nullptr;
-	// test
+		//// test
+		//enemies.erase(find(enemies.begin(), enemies.end(), enemy)); // remove from vector
+		//delete enemy;
+		//r = nullptr;
+		//// test
 
-	
-	// draw combat screen
-	// do combat
+
+		// draw combat screen
+		// do combat
+
+		if (playerTurn == true)
+		{
+			std::cout << "A to attack, U to use item\n\n";
+			char tempChar = _getch();
+
+			if (tempChar == 'a')
+			{
+				player->Attack(enemy);
+				playerTurn = false;
+				tempChar = 'P';
+			}
+
+			if (tempChar == 'u')
+			{
+					player->UseItem();
+					playerTurn = false;
+					tempChar = 'P';
+			}
+			
+		}
+
+		else
+		{
+			enemy->Attack(player);
+			playerTurn = true;
+		}
+
+		if (enemy->currentHealth <= 0)
+		{
+			enemyAlive = false;
+			enemy = NULL;
+			system("cls"); // clear screen
+		}
+
+		//Decision in combat
+	}
 	
 
 	Map::Instance()->DrawMap(); // draw map again
@@ -132,6 +173,7 @@ int main()
 				if (enemy->x == player->x && enemy->y == player->y)
 				{
 					// begin combat
+					enemyAlive = true;
 					Combat(player, enemy);
 				}
 			}
