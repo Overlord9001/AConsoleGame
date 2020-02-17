@@ -15,6 +15,7 @@ public:
 	int armor = 5;
 	int x;
 	int y;
+	char icon = 'E';
 
 	virtual void Move();
 	void UseItem();
