@@ -2,8 +2,6 @@
 #include "Enemy.h"
 #include "Map.h"
 
-//Map* map = Map::Instance();
-
 void Lizardman::SpearThrow()
 {
 	
@@ -11,6 +9,7 @@ void Lizardman::SpearThrow()
 
 void Lizardman::Move()
 {
+	Map* map = Map::Instance();
 	Enemy::Move();
 }
 

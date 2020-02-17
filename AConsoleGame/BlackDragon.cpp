@@ -1,14 +1,13 @@
 #include "BlackDragon.h"
 #include "Map.h"
 
-//Map* map = Map::Instance();
-
 void BlackDragon::BreathAttack()
 {
 }
 
 void BlackDragon::Move()
 {
+	Map* map = Map::Instance();
 	Enemy::Move();
 }
 
