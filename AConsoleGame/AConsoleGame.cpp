@@ -38,20 +38,24 @@ vector<Enemy*> enemies;
 
 void Combat(Player * player, Enemy * enemy)
 {
+	system("cls"); // clear screen
+
 	Goblin * r = nullptr;
 	if (strcmp(typeid(enemy).name(), "Goblin")) // check if enemy is a goblin
 		r = (Goblin*)enemy;
 
 	// test
 	enemies.erase(find(enemies.begin(), enemies.end(), enemy)); // remove from vector
-	delete r;
+	delete enemy;
 	r = nullptr;
 	// test
 
-	// clear screen
+	
 	// draw combat screen
 	// do combat
-	// draw map again
+	
+
+	Map::Instance()->DrawMap(); // draw map again
 }
 
 int main()
