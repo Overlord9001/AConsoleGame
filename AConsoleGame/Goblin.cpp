@@ -1,8 +1,6 @@
 #include "Goblin.h"
 #include "Map.h"
 
-
-
 void Goblin::Backstab()
 {
 
@@ -11,33 +9,31 @@ void Goblin::Backstab()
 void Goblin::Move()
 {
 	Map* map = Map::Instance();
+
 	int oldY = y;
 	int oldX = x;
-	
-	Player* player = Player::Instance();
-
-	if (player->y < y)
+	int r = rand() % 4;
+	switch (r)
 	{
-		y--;
-	}
-	else if (player->y > y)
-	{
-		y++;
-	}
-	else if (player->x < x)
-	{
-		x--;
-	}
-	else if (player->x > x)
-	{
+	case 0:
 		x++;
+		break;
+	case 1:
+		x--;
+		break;
+	case 2:
+		y++;
+		break;
+	case 3:
+		y--;
+		break;
 	}
 
 	if (map->map[y][x] == ' ')
 	{
-		map->Move(oldX, oldY, x, y, GOBLIN);
+		map->Move(oldX, oldY, x, y, icon);
 	}
-	else // if trying to move into an invalid spot
+	else // if trying to move into a wall
 	{
 		y = oldY;
 		x = oldX;
@@ -48,6 +44,7 @@ Goblin::Goblin(int hitPoint, int damage, int armorClass, int speed) : Enemy (hit
 {
 	Map* map = Map::Instance();
 	map->map[15][15] = GOBLIN;
+	icon = GOBLIN;
 }
 
 Goblin::~Goblin()

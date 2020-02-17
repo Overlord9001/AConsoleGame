@@ -35,7 +35,6 @@ Enemy * enemyPTR = &enemy;
 int state = 0;
 vector<Enemy*> enemies;
 
-
 void Combat(Player * player, Enemy * enemy)
 {
 	system("cls"); // clear screen
@@ -80,7 +79,6 @@ int main()
 	enemies.push_back(new Orc(10, 10, 10, 10));
 	enemies.push_back(new BlackDragon(10, 10, 10, 10));
 	
-	
 	int oldX = 0;
 	int oldY = 0;
 	map->map[player->y][player->x] = PLAYER;
@@ -88,8 +86,6 @@ int main()
 
 	map->DrawMap();
 	
-	
-
 	int updateEnemies = 0;
 	while (run) // game loop
 	{

@@ -2,8 +2,6 @@
 #include "Player.h"
 #include "Map.h"
 
-
-
 void Orc::Rage()
 {
 }
@@ -11,6 +9,7 @@ void Orc::Rage()
 void Orc::Move()
 {
 	Map* map = Map::Instance();
+	
 	int oldY = y;
 	int oldX = x;
 	Player* player = Player::Instance();
@@ -45,7 +44,7 @@ void Orc::Move()
 
 Orc::Orc(int hitPoint, int damage, int armorClass, int speed) : Enemy(hitPoint, damage, armorClass, speed)
 {
-	icon = 'O';
+	icon = ORC;
 }
 
 Orc::Orc()
