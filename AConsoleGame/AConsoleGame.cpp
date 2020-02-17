@@ -146,7 +146,8 @@ int main()
 			{
 				for (Enemy * enemy : enemies)
 				{
-					enemy->Move();
+					if (enemy->Move()) // if enemy colides with player begin combat
+						Combat(player, enemy);
 				}
 				updateEnemies = 0;
 			}

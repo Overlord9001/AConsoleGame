@@ -85,7 +85,7 @@ void Map::MapSetup(int mapX, int mapY)
 			{
 				map[y][x] = ' ';
 			}
-		} 	
+		} 
 	}
 }
 
@@ -121,6 +121,17 @@ void Map::DrawMap()
 
 			SetConsoleTextAttribute(hOut, 15); // set color back to white
 		}
+		cout << "   ";
+		switch (y) // write tutorial
+		{
+		case 0:
+			cout << "Move your charater: " << PLAYER << " with the arrowkeys";
+			break;
+		case 1:
+			cout << "Move into an enemy to begin combat";
+			break;
+		}
+
 		cout << endl;
 	}
 }

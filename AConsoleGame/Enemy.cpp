@@ -7,7 +7,7 @@ Map* map = Map::Instance();
 
 
 
-void Enemy::Move()
+bool Enemy::Move()
 {
 	int oldY = y;
 	int oldX = x;
@@ -37,6 +37,7 @@ void Enemy::Move()
 		y = oldY;
 		x = oldX;
 	}
+	return false;
 }
 
 void Enemy::UseItem()

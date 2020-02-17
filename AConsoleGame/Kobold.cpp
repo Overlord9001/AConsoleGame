@@ -8,7 +8,7 @@ void Kobold::SlingShot()
 {
 }
 
-void Kobold::Move()
+bool Kobold::Move()
 {
 	Map* map = Map::Instance();
 	int oldY = y;
@@ -51,6 +51,7 @@ void Kobold::Move()
 		y = oldY;
 		x = oldX;
 	}
+	return false;
 }
 
 Kobold::Kobold(int hitPoint, int damage, int armorClass, int speed) : Enemy (hitPoint, damage, armorClass, speed)
