@@ -54,7 +54,7 @@ void Combat(Player * player, Enemy * enemy)
 	// draw combat screen
 	// do combat
 	
-
+	system("cls"); // clear screen
 	Map::Instance()->DrawMap(); // draw map again
 }
 
@@ -127,12 +127,11 @@ int main()
 		}
 		else if (map->map[player->y][player->x] != 'O' && map->map[player->y][player->x] != ' ') // if moving onto an enemy
 		{
-			for (Enemy* enemy : enemies)
+			for (Enemy* enemy : enemies) // find the enemy colided with
 			{
 				if (enemy->x == player->x && enemy->y == player->y)
 				{
-					// begin combat
-					Combat(player, enemy);
+					Combat(player, enemy); // begin combat
 				}
 			}
 
