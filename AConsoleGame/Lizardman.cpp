@@ -2,16 +2,15 @@
 #include "Enemy.h"
 #include "Map.h"
 
-//Map* map = Map::Instance();
-
 void Lizardman::SpearThrow()
 {
 	
 }
 
-void Lizardman::Move()
+bool Lizardman::Move()
 {
-	Enemy::Move();
+	Map* map = Map::Instance();
+	return Enemy::Move();
 }
 
 Lizardman::Lizardman(int hitPoint, int damage, int armorClass, int speed) : Enemy(hitPoint, damage, armorClass, speed)

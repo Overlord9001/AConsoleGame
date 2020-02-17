@@ -34,25 +34,66 @@ Player * player = Player::Instance();
 Enemy * enemyPTR = &enemy;
 int state = 0;
 vector<Enemy*> enemies;
+bool enemyAlive = false;
+bool playerTurn = true;
 
 
 void Combat(Player * player, Enemy * enemy)
 {
 	system("cls"); // clear screen
 
-	Goblin * r = nullptr;
-	if (strcmp(typeid(enemy).name(), "Goblin")) // check if enemy is a goblin
-		r = (Goblin*)enemy;
+	while (enemyAlive)
+	{
+		Goblin * r = nullptr;
+		if (strcmp(typeid(enemy).name(), "Goblin")) // check if enemy is a goblin
+			r = (Goblin*)enemy;
 
-	// test
-	enemies.erase(find(enemies.begin(), enemies.end(), enemy)); // remove from vector
-	delete enemy;
-	r = nullptr;
-	// test
+		//// test
+		//enemies.erase(find(enemies.begin(), enemies.end(), enemy)); // remove from vector
+		//delete enemy;
+		//r = nullptr;
+		//// test
 
-	
-	// draw combat screen
-	// do combat
+
+		// draw combat screen
+		// do combat
+
+		if (playerTurn == true)
+		{
+			std::cout << "A to attack, U to use item\n\n";
+			char tempChar = _getch();
+
+			if (tempChar == 'a')
+			{
+				player->Attack(enemy);
+				playerTurn = false;
+				tempChar = 'P';
+			}
+
+			if (tempChar == 'u')
+			{
+					player->UseItem();
+					playerTurn = false;
+					tempChar = 'P';
+			}
+			
+		}
+
+		else
+		{
+			enemy->Attack(player);
+			playerTurn = true;
+		}
+
+		if (enemy->currentHealth <= 0)
+		{
+			enemyAlive = false;
+			enemy = NULL;
+			system("cls"); // clear screen
+		}
+
+		//Decision in combat
+	}
 	
 
 	Map::Instance()->DrawMap(); // draw map again
@@ -148,11 +189,12 @@ int main()
 		}
 		else if (map->map[player->y][player->x] != 'O' && map->map[player->y][player->x] != ' ') // if moving onto an enemy
 		{
-			for (Enemy* enemy : enemies)
+			for (Enemy* enemy : enemies) // find the enemy colided with
 			{
 				if (enemy->x == player->x && enemy->y == player->y)
 				{
 					// begin combat
+					enemyAlive = true;
 					Combat(player, enemy);
 				}
 			}
@@ -168,7 +210,8 @@ int main()
 			{
 				for (Enemy * enemy : enemies)
 				{
-					enemy->Move();
+					if (enemy->Move()) // if enemy colides with player begin combat
+						Combat(player, enemy);
 				}
 				updateEnemies = 0;
 			}

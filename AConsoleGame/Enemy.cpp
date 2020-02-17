@@ -7,7 +7,7 @@ Map* map = Map::Instance();
 
 
 
-void Enemy::Move()
+bool Enemy::Move()
 {
 	int oldY = y;
 	int oldX = x;
@@ -28,7 +28,7 @@ void Enemy::Move()
 		break;
 	}
 
-	if(map->map[y][x] == ' ')
+	if(map->map[y][x] == ' ' || map->map[y][x] == PLAYER)
 	{
 		map->Move(oldX, oldY, x, y, icon);
 	}
@@ -37,6 +37,7 @@ void Enemy::Move()
 		y = oldY;
 		x = oldX;
 	}
+	return false;
 }
 
 void Enemy::UseItem()
@@ -55,7 +56,6 @@ void Enemy::Attack(Player * player)
 		std::cout << "Enemy strikes you for " << (currentDamage - player->armor) << " damage \n";
 		std::cout << "You have " << player->currentHealth << " health left \n \n";
 	}
-
 	else
 	{
 		std::cout << "Your armor repels the attack";
@@ -66,7 +66,6 @@ Enemy::Enemy(int hitPoint, int damage, int armorClass, int speed)
 {
 	x = 15;
 	y = 15;
-
 }
 
 Enemy::Enemy()

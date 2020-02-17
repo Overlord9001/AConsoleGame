@@ -8,7 +8,7 @@ void Orc::Rage()
 {
 }
 
-void Orc::Move()
+bool Orc::Move()
 {
 	Map* map = Map::Instance();
 	int oldY = y;
@@ -32,7 +32,7 @@ void Orc::Move()
 		y--;
 	}
 
-	if (map->map[y][x] == ' ')
+	if (map->map[y][x] == ' ' || map->map[y][x] == PLAYER)
 	{
 		map->Move(oldX, oldY, x, y, icon);
 	}
@@ -41,6 +41,7 @@ void Orc::Move()
 		y = oldY;
 		x = oldX;
 	}
+	return false;
 }
 
 Orc::Orc(int hitPoint, int damage, int armorClass, int speed) : Enemy(hitPoint, damage, armorClass, speed)

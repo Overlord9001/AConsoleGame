@@ -5,7 +5,7 @@ class Lizardman : public Enemy
 {
 public:
 	void SpearThrow();
-	void Move() override;
+	bool Move() override;
 
 	Lizardman(int hitPoint, int damage, int armorClass, int speed);
 	Lizardman();
