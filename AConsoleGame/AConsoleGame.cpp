@@ -168,7 +168,7 @@ int main()
 		}
 		else if (map->map[player->y][player->x] != 'O' && map->map[player->y][player->x] != ' ') // if moving onto an enemy
 		{
-			for (Enemy* enemy : enemies)
+			for (Enemy* enemy : enemies) // find the enemy colided with
 			{
 				if (enemy->x == player->x && enemy->y == player->y)
 				{
