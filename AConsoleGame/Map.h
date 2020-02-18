@@ -14,6 +14,7 @@
 #define ORCCOLOR 14 // yellow
 #define BLACKDRAGON 'B'
 #define BLACKDRAGONCOLOR 5 // purple
+#define TEXTWHITE SetConsoleTextAttribute(hOut, 15)
 
 
 class Map
