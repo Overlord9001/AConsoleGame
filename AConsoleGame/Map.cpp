@@ -130,6 +130,36 @@ void Map::DrawMap()
 		case 1:
 			cout << "Move into an enemy to begin combat";
 			break;
+		case 2:
+			SetConsoleTextAttribute(hOut, GOBLINCOLOR);
+			cout << GOBLIN;
+			TEXTWHITE;
+			cout << " is a goblin";
+			break;
+		case 3:
+			SetConsoleTextAttribute(hOut, ORCCOLOR);
+			cout << ORC;
+			TEXTWHITE;
+			cout << " is an orc";
+			break;
+		case 4:
+			SetConsoleTextAttribute(hOut, LIZARDMANCOLOR);
+			cout << LIZARDMAN;
+			TEXTWHITE;
+			cout << " is a lizardman";
+			break;
+		case 5:
+			SetConsoleTextAttribute(hOut, KOBOLDCOLOR);
+			cout << KOBOLD;
+			TEXTWHITE;
+			cout << " is a kobold";
+			break;
+		case 6:
+			SetConsoleTextAttribute(hOut, BLACKDRAGONCOLOR);
+			cout << BLACKDRAGON;
+			TEXTWHITE;
+			cout << " is a blackdragon";
+			break;
 		}
 
 		cout << endl;
