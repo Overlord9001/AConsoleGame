@@ -9,8 +9,8 @@ class Player;
 class Enemy
 {
 public:
-	int currentHealth = 100;
 	int maxHealth = 100;
+	int currentHealth = maxHealth;
 	int damage = 10;
 	int armor = 5;
 	int x;
@@ -23,6 +23,7 @@ public:
 
 	Enemy(int hitPoint, int damage, int armorClass);
 	Enemy();
+	~Enemy();
 
 };
 

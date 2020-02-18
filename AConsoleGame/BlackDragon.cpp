@@ -71,3 +71,8 @@ BlackDragon::BlackDragon(int hitPoint, int damage, int armorClass) : Enemy (hitP
 {
 	icon = BLACKDRAGON;
 }
+
+BlackDragon::~BlackDragon()
+{
+
+}
