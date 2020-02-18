@@ -34,32 +34,22 @@ Player * player = Player::Instance();
 Enemy * enemyPTR = &enemy;
 int state = 0;
 vector<Enemy*> enemies;
-bool enemyAlive = false;
-bool playerTurn = true;
 
 void Combat(Player * player, Enemy * enemy)
 {
 	system("cls"); // clear screen
+	bool enemyAlive = false;
+	bool playerTurn = true;
 
 	while (enemyAlive)
 	{
-		Goblin * r = nullptr;
-		if (strcmp(typeid(enemy).name(), "Goblin")) // check if enemy is a goblin
-			r = (Goblin*)enemy;
-
-		//// test
-		//enemies.erase(find(enemies.begin(), enemies.end(), enemy)); // remove from vector
-		//delete enemy;
-		//r = nullptr;
-		//// test
-
-
-		// draw combat screen
-		// do combat
+		//Goblin * r = nullptr;
+		//if (strcmp(typeid(enemy).name(), "Goblin")) // check if enemy is a goblin
+		//	r = (Goblin*)enemy;
 
 		if (playerTurn == true)
 		{
-			std::cout << "A to attack, U to use item\n\n";
+			std::cout << "A to attack, U to use item\n\n"; 
 			char tempChar = _getch();
 
 			if (tempChar == 'a')
@@ -77,7 +67,6 @@ void Combat(Player * player, Enemy * enemy)
 			}
 			
 		}
-
 		else
 		{
 			enemy->Attack(player);
@@ -87,7 +76,8 @@ void Combat(Player * player, Enemy * enemy)
 		if (enemy->currentHealth <= 0)
 		{
 			enemyAlive = false;
-			enemy = NULL;
+			enemies.erase(find(enemies.begin(), enemies.end(), enemy)); // remove from vector
+			delete enemy;
 			system("cls"); // clear screen
 		}
 
@@ -168,12 +158,11 @@ int main()
 			case 'p': //stops / restarts the music
 				if (soundEngine->isCurrentlyPlaying("bgMusic.wav"))
 				{
-					soundEngine->stopAllSounds(); // gør at if sætningen ikke kan bruges efter man har droppet første gang.
+					soundEngine->removeAllSoundSources(); //stops
 				}
 				else
 				{
-					//ISoundEngine * soundEngine = createIrrKlangDevice();
-					soundEngine->play2D("bgMusic.wav"); // på grund af drop() ikke virker som jeg havde regnet med virker det her heller ikke.
+					soundEngine->play2D("bgMusic.wav"); //starts
 				}
 				break;
 			}
@@ -190,7 +179,6 @@ int main()
 				if (enemy->x == player->x && enemy->y == player->y)
 				{
 					// begin combat
-					enemyAlive = true;
 					Combat(player, enemy);
 				}
 			}
