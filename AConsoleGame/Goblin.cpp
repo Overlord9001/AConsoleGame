@@ -52,8 +52,6 @@ bool Goblin::Move()
 
 Goblin::Goblin(int hitPoint, int damage, int armorClass, int speed) : Enemy (hitPoint, damage, armorClass, speed)
 {
-	Map* map = Map::Instance();
-	map->map[15][15] = GOBLIN;
 	icon = GOBLIN;
 }
 

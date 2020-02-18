@@ -41,9 +41,8 @@ void Reset()
 		delete enemy;
 	}
 	enemies.clear(); // clear vector
-	enemies.end();
 
-	enemies.push_back(new Goblin(10, 10, 10, 10));
+	enemies.push_back(new Goblin(50, 10, 10, 10));
 	enemies.push_back(new Kobold(10, 10, 10, 10));
 	enemies.push_back(new Lizardman(10, 10, 10, 10));
 	enemies.push_back(new Orc(10, 10, 10, 10));
@@ -55,7 +54,6 @@ void Reset()
 	map->map[player->y][player->x] = PLAYER;
 
 	system("cls");
-	//map->DrawMap();
 }
 
 void Combat(Player * player, Enemy * enemy)
@@ -227,7 +225,10 @@ int main()
 			for (Enemy * enemy : enemies)
 			{
 				if (enemy->Move()) // if enemy colides with player begin combat
+				{
 					Combat(player, enemy);
+					break;
+				}
 			}
 			updateEnemies = 0;
 		}

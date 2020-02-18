@@ -66,10 +66,15 @@ Enemy::Enemy(int hitPoint, int damage, int armorClass, int speed)
 {
 	x = 15;
 	y = 15;
+	this->maxHealth = hitPoint;
+	this->damage = damage;
+	this->armor = armorClass;
+	currentHealth = maxHealth;
 }
 
 Enemy::Enemy()
 {
+
 }
 
 Enemy::~Enemy()
