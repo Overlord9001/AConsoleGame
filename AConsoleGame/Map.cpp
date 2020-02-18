@@ -35,25 +35,25 @@ void Map::Move(int oldX, int oldY, int newX, int newY, char icon)
 	switch (icon)
 	{
 	case PLAYER: // player
-		SetConsoleTextAttribute(hOut, PLAYERCOLOR); // blue
+		TEXTPLAYER; // blue
 		break;
 	case 'E': // enemy
 		SetConsoleTextAttribute(hOut, 4); // deep red
 		break;
 	case GOBLIN:
-		SetConsoleTextAttribute(hOut, GOBLINCOLOR); // green
+		TEXTGOBLIN; // green
 		break;
 	case KOBOLD:
-		SetConsoleTextAttribute(hOut, KOBOLDCOLOR); // red
+		TEXTKOBOLD; // red
 		break;
 	case LIZARDMAN:
-		SetConsoleTextAttribute(hOut, LIZARDMANCOLOR); // turqoise
+		TEXTLIZARDMAN; // turqoise
 		break;
 	case ORC:
-		SetConsoleTextAttribute(hOut, ORCCOLOR); // yellow
+		TEXTORC; // yellow
 		break;
 	case BLACKDRAGON:
-		SetConsoleTextAttribute(hOut, BLACKDRAGONCOLOR); // purple
+		TEXTBLACKDRAGON; // purple
 		break;
 	}
 
@@ -63,7 +63,7 @@ void Map::Move(int oldX, int oldY, int newX, int newY, char icon)
 	SetCursorPosition(0, 0);
 
 	// set the color back to white
-	SetConsoleTextAttribute(hOut, 15);
+	TEXTWHITE;
 
 	// update the array
 	map[oldY][oldX] = ' ';
@@ -99,27 +99,27 @@ void Map::DrawMap()
 			switch (map[y][x]) // draw with the correct color
 			{
 			case PLAYER:
-				SetConsoleTextAttribute(hOut, PLAYERCOLOR);
+				TEXTPLAYER;
 				break;
 			case GOBLIN:
-				SetConsoleTextAttribute(hOut, GOBLINCOLOR);
+				TEXTGOBLIN;
 				break;
 			case KOBOLD:
-				SetConsoleTextAttribute(hOut, KOBOLDCOLOR);
+				TEXTKOBOLD;
 				break;
 			case LIZARDMAN:
-				SetConsoleTextAttribute(hOut, LIZARDMANCOLOR);
+				TEXTLIZARDMAN;
 				break;
 			case ORC:
-				SetConsoleTextAttribute(hOut, ORCCOLOR);
+				TEXTORC;
 				break;
 			case BLACKDRAGON:
-				SetConsoleTextAttribute(hOut, BLACKDRAGONCOLOR);
+				TEXTBLACKDRAGON;
 				break;
 			}
 			cout << map[y][x] << " ";
 
-			SetConsoleTextAttribute(hOut, 15); // set color back to white
+			TEXTWHITE; // set color back to white
 		}
 		cout << "   ";
 		switch (y) // write tutorial
