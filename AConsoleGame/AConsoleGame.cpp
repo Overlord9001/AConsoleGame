@@ -168,7 +168,7 @@ int main()
 			case 'p': //stops / restarts the music
 				if (soundEngine->isCurrentlyPlaying("bgMusic.wav"))
 				{
-					soundEngine->removeAllSoundSources(); // gør at if sætningen ikke kan bruges efter man har droppet første gang.
+					soundEngine->stopAllSounds(); // gør at if sætningen ikke kan bruges efter man har droppet første gang.
 				}
 				else
 				{
@@ -183,7 +183,7 @@ int main()
 			player->y = oldY;
 			player->x = oldX;
 		}
-		else if (map->map[player->y][player->x] != 'O' && map->map[player->y][player->x] != ' ') // if moving onto an enemy
+		else if (map->map[player->y][player->x] != '#' && map->map[player->y][player->x] != ' ' && map->map[player->y][player->x] != PLAYER) // if moving onto an enemy
 		{
 			for (Enemy* enemy : enemies) // find the enemy colided with
 			{
