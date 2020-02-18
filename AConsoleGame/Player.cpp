@@ -54,6 +54,7 @@ Player::Player()
 {
 	x = 5;
 	y = 5;
+	this->item = 3;
 }
 
 Player::~Player()

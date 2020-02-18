@@ -97,6 +97,10 @@ void Combat(Player * player, Enemy * enemy)
 			{
 				player->item++;
 			}
+			else
+			{
+				player->gold += 12;
+			}
 			enemyAlive = false;
 			enemies.remove(enemy);
 			delete enemy;
