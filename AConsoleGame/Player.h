@@ -5,11 +5,11 @@ class Enemy;
 class Player
 {
 public:
-	int gold = 3333;
+	int gold = 1337;
 	int damage = 15;
 	int maxHealth = 100;
 	int currentHealth = 100;
-	int armor = 5;
+	int armor = 1;
 	int item;
 	int x;
 	int y;
