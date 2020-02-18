@@ -37,11 +37,11 @@ void Player::SpecialMove(Enemy * enemy)
 
 void Player::UseItem()
 {
-	if (item == true)
+	if (item >= 1 && currentHealth != maxHealth)
 	{
 		currentHealth = maxHealth;
 		std::cout << "You pull out and drink a potion regenerating your health to full\n\n";
-		item = false;
+		item--;
 	}
 
 	else

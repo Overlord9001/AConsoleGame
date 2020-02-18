@@ -70,7 +70,7 @@ bool Lizardman::Move()
 	return false;
 }
 
-Lizardman::Lizardman(int hitPoint, int damage, int armorClass, int speed) : Enemy(hitPoint, damage, armorClass, speed)
+Lizardman::Lizardman(int hitPoint, int damage, int armorClass) : Enemy(hitPoint, damage, armorClass)
 {
 	icon = LIZARDMAN;
 }

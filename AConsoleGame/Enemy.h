@@ -21,7 +21,7 @@ public:
 	void UseItem();
 	void Attack(Player * player);
 
-	Enemy(int hitPoint, int damage, int armorClass, int speed);
+	Enemy(int hitPoint, int damage, int armorClass);
 	Enemy();
 
 };

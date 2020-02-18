@@ -38,7 +38,7 @@ vector<Enemy*> enemies;
 void Combat(Player * player, Enemy * enemy)
 {
 	system("cls"); // clear screen
-	bool enemyAlive = false;
+	bool enemyAlive = true;
 	bool playerTurn = true;
 
 	while (enemyAlive)
@@ -75,6 +75,10 @@ void Combat(Player * player, Enemy * enemy)
 
 		if (enemy->currentHealth <= 0)
 		{
+			if (player->item < 4)
+			{
+				player->item++;
+			}
 			enemyAlive = false;
 			enemies.erase(find(enemies.begin(), enemies.end(), enemy)); // remove from vector
 			delete enemy;
@@ -104,11 +108,11 @@ int main()
 	soundEngine->play2D("bgMusic.wav");
 	system("cls");
 	
-	enemies.push_back(new Goblin(10, 10, 10, 10));
-	enemies.push_back(new Kobold(10, 10, 10, 10));
-	enemies.push_back(new Lizardman(10, 10, 10, 10));
-	enemies.push_back(new Orc(10, 10, 10, 10));
-	enemies.push_back(new BlackDragon(10, 10, 10, 10));
+	enemies.push_back(new Goblin(10, 10, 10));
+	enemies.push_back(new Kobold(10, 10, 10));
+	enemies.push_back(new Lizardman(10, 10, 10));
+	enemies.push_back(new Orc(10, 10, 10));
+	enemies.push_back(new BlackDragon(10, 10, 10));
 	
 	int oldX = 0;
 	int oldY = 0;

@@ -46,7 +46,7 @@ bool Goblin::Move()
 	return false;
 }
 
-Goblin::Goblin(int hitPoint, int damage, int armorClass, int speed) : Enemy (hitPoint, damage, armorClass, speed)
+Goblin::Goblin(int hitPoint, int damage, int armorClass) : Enemy (hitPoint, damage, armorClass)
 {
 	Map* map = Map::Instance();
 	map->map[15][15] = GOBLIN;

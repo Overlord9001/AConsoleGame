@@ -7,7 +7,7 @@ public:
 	void SlingShot();
 	bool Move() override;
 
-	Kobold(int hitPoint, int damage, int armorClass, int speed);
+	Kobold(int hitPoint, int damage, int armorClass);
 	Kobold();
 };
 

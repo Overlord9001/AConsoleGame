@@ -10,7 +10,7 @@ public:
 	int maxHealth = 100;
 	int currentHealth = 100;
 	int armor = 5;
-	bool item = true;
+	int item;
 	int x;
 	int y;
 

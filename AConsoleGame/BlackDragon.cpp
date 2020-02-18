@@ -67,7 +67,7 @@ bool BlackDragon::Move()
 	return false;
 }
 
-BlackDragon::BlackDragon(int hitPoint, int damage, int armorClass, int speed) : Enemy (hitPoint, damage, armorClass, speed)
+BlackDragon::BlackDragon(int hitPoint, int damage, int armorClass) : Enemy (hitPoint, damage, armorClass)
 {
 	icon = BLACKDRAGON;
 }
