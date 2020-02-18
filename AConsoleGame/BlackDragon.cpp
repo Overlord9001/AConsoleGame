@@ -51,7 +51,7 @@ bool BlackDragon::Move()
 
 	if (x < 0 || y < 0 || x > MAPX - 1 || y > MAPY - 1)
 	{
-		x == oldX;
+		x = oldX;
 		y = oldY;
 	}
 	
