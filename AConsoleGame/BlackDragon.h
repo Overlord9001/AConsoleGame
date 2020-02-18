@@ -7,5 +7,6 @@ public:
 	bool Move() override;
 
 	BlackDragon(int hitPoint, int damage, int armorClass, int speed);
+	~BlackDragon();
 };
 

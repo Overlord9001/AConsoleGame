@@ -3,7 +3,7 @@
 #include "Enemy.h"
 #include <time.h>
 
-Player * Player::instance = 0;
+Player * Player::instance = nullptr;
 
 Player * Player::Instance()
 {
@@ -58,4 +58,5 @@ Player::Player()
 
 Player::~Player()
 {
+	instance = nullptr;
 }

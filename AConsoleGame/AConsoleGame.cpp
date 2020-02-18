@@ -5,6 +5,7 @@
 #include <conio.h>
 #include <Windows.h>
 #include <vector> 
+#include <list>
 #include <typeinfo>
 #include <Windows.h>
 #include <time.h>
@@ -29,16 +30,38 @@ using namespace irrklang;
 #define ARROW_RIGHT 0x4D
 #define ARROW_DOWN  0x50
 
-Enemy enemy = Enemy();
 Player * player = Player::Instance();
-Enemy * enemyPTR = &enemy;
-int state = 0;
-vector<Enemy*> enemies;
+list<Enemy*> enemies;
+
+void Reset()
+{
+	Map* map = Map::Instance();
+	for (Enemy * enemy : enemies) // calls the destructor for all elements
+	{
+		delete enemy;
+	}
+	enemies.clear(); // clear vector
+	enemies.end();
+
+	enemies.push_back(new Goblin(10, 10, 10, 10));
+	enemies.push_back(new Kobold(10, 10, 10, 10));
+	enemies.push_back(new Lizardman(10, 10, 10, 10));
+	enemies.push_back(new Orc(10, 10, 10, 10));
+	enemies.push_back(new BlackDragon(10, 10, 10, 10));
+
+	map->MapSetup(MAPX, MAPY);
+	delete player;
+	player = Player::Instance();
+	map->map[player->y][player->x] = PLAYER;
+
+	system("cls");
+	//map->DrawMap();
+}
 
 void Combat(Player * player, Enemy * enemy)
 {
 	system("cls"); // clear screen
-	bool enemyAlive = false;
+	bool enemyAlive = true;
 	bool playerTurn = true;
 
 	while (enemyAlive)
@@ -76,9 +99,17 @@ void Combat(Player * player, Enemy * enemy)
 		if (enemy->currentHealth <= 0)
 		{
 			enemyAlive = false;
-			enemies.erase(find(enemies.begin(), enemies.end(), enemy)); // remove from vector
+			//enemies.erase(find(enemies.begin(), enemies.end(), enemy)); // remove from vector
+			//enemies.erase(remove(enemies.begin(), enemies.end(),)
+			enemies.remove(enemy);
 			delete enemy;
 			system("cls"); // clear screen
+		}
+
+		if (player->currentHealth <= 0)
+		{
+			enemyAlive = false;
+			Reset();
 		}
 
 		//Decision in combat
@@ -97,75 +128,75 @@ int main()
 	ShowWindow(console, SW_SHOWMAXIMIZED);
 
 	Map* map = Map::Instance();
-
-	map->MapSetup(MAPX, MAPY);
+	
+	//map->MapSetup(MAPX, MAPY);
 
 	ISoundEngine * soundEngine = createIrrKlangDevice();
 	soundEngine->play2D("bgMusic.wav");
 	system("cls");
-	
-	enemies.push_back(new Goblin(10, 10, 10, 10));
-	enemies.push_back(new Kobold(10, 10, 10, 10));
-	enemies.push_back(new Lizardman(10, 10, 10, 10));
-	enemies.push_back(new Orc(10, 10, 10, 10));
-	enemies.push_back(new BlackDragon(10, 10, 10, 10));
-	
+
+	Reset();
+	map->DrawMap();
+
+	//enemies.push_back(new Goblin(10, 10, 10, 10));
+	//enemies.push_back(new Kobold(10, 10, 10, 10));
+	//enemies.push_back(new Lizardman(10, 10, 10, 10));
+	//enemies.push_back(new Orc(10, 10, 10, 10));
+	//enemies.push_back(new BlackDragon(10, 10, 10, 10));
+
 	int oldX = 0;
 	int oldY = 0;
-	map->map[player->y][player->x] = PLAYER;
-	bool run = true;
+	//map->map[player->y][player->x] = PLAYER;
 
-	map->DrawMap();
-	
+	//map->DrawMap();
+
 	int updateEnemies = 0;
+	bool run = true;
 	while (run) // game loop
 	{
-		//World roam state
-		if (state == 0)
-		{
-			// save old position
-			oldY = player->y;
-			oldX = player->x;
+		// save old position
+		oldY = player->y;
+		oldX = player->x;
 
-			switch (_getch()) // get arrow keys input
+		switch (_getch()) // get arrow keys input
+		{
+		case ARROW_UP:
+			player->y--;
+			updateEnemies++;
+			break;
+		case ARROW_DOWN:
+			player->y++;
+			updateEnemies++;
+			break;
+		case ARROW_RIGHT:
+			player->x++;
+			updateEnemies++;
+			break;
+		case ARROW_LEFT:
+			player->x--;
+			updateEnemies++;
+			break;
+		case 'm': //mutes the music
+			if (soundEngine->getSoundVolume() != 0)
 			{
-			case ARROW_UP:
-				player->y--;
-				updateEnemies++;
-				break;
-			case ARROW_DOWN:
-				player->y++;
-				updateEnemies++;
-				break;
-			case ARROW_RIGHT:
-				player->x++;
-				updateEnemies++;
-				break;
-			case ARROW_LEFT:
-				player->x--;
-				updateEnemies++;
-				break;
-			case 'm': //mutes the music
-				if (soundEngine->getSoundVolume() != 0)
-				{
-					soundEngine->setSoundVolume(0);
-				}
-				else
-				{
-					soundEngine->setSoundVolume(1);
-				}
-				break;
-			case 'p': //stops / restarts the music
-				if (soundEngine->isCurrentlyPlaying("bgMusic.wav"))
-				{
-					soundEngine->removeAllSoundSources(); //stops
-				}
-				else
-				{
-					soundEngine->play2D("bgMusic.wav"); //starts
-				}
-				break;
+				soundEngine->setSoundVolume(0);
 			}
+			else
+			{
+				soundEngine->setSoundVolume(1);
+			}
+			break;
+		case 'p': //stops / restarts the music
+			if (soundEngine->isCurrentlyPlaying("bgMusic.wav"))
+			{
+				soundEngine->removeAllSoundSources(); //stops
+			}
+			else
+			{
+				soundEngine->play2D("bgMusic.wav"); //starts
+			}
+			break;
+		}
 
 		if (map->map[player->y][player->x] == '#') // if moving into a wall
 		{
@@ -180,6 +211,7 @@ int main()
 				{
 					// begin combat
 					Combat(player, enemy);
+					break;
 				}
 			}
 
@@ -190,54 +222,53 @@ int main()
 			map->Move(oldX, oldY, player->x, player->y, PLAYER);
 		}
 
-			if (updateEnemies >= 2) // time between the enemies move. So the player can catch them.
+		if (updateEnemies >= 2) // time between the enemies move. So the player can catch them.
+		{
+			for (Enemy * enemy : enemies)
 			{
-				for (Enemy * enemy : enemies)
-				{
-					if (enemy->Move()) // if enemy colides with player begin combat
-						Combat(player, enemy);
-				}
-				updateEnemies = 0;
+				if (enemy->Move()) // if enemy colides with player begin combat
+					Combat(player, enemy);
 			}
+			updateEnemies = 0;
+		}
 
 #pragma region DrawingStats
 
-			map->SetCursorPosition(0, MAPY + 2);
+		map->SetCursorPosition(0, MAPY + 2);
 
-			std::cout << "Gold:" << player->gold;
+		std::cout << "Gold:" << player->gold;
 
-			map->SetCursorPosition(20, MAPY + 2);
+		map->SetCursorPosition(20, MAPY + 2);
 
-			std::cout << "Armor:" << player->armor;
+		std::cout << "Armor:" << player->armor;
 
-			map->SetCursorPosition(40, MAPY + 2);
+		map->SetCursorPosition(40, MAPY + 2);
 
-			std::cout << "Health:" << player->currentHealth;
+		std::cout << "Health:" << player->currentHealth;
 
-			map->SetCursorPosition(0, MAPY + 4);
+		map->SetCursorPosition(0, MAPY + 4);
 
-			std::cout << "AVG DMG:" << (int)(player->damage);
+		std::cout << "AVG DMG:" << (int)(player->damage);
 
-			map->SetCursorPosition(20, MAPY + 4);
+		map->SetCursorPosition(20, MAPY + 4);
 
-			std::cout << "MIN DMG:" << (int)(player->damage * 0.75);
+		std::cout << "MIN DMG:" << (int)(player->damage * 0.75);
 
-			map->SetCursorPosition(40, MAPY + 4);
+		map->SetCursorPosition(40, MAPY + 4);
 
-			std::cout << "MAX DMG:" << (int)(player->damage * 1.25);
+		std::cout << "MAX DMG:" << (int)(player->damage * 1.25);
 
-			map->SetCursorPosition(0, 0);
+		map->SetCursorPosition(0, 0);
 
 #pragma endregion
-		}
 
-		//Combat state
-		if (state == 1)
-		{
-			player->Attack(enemyPTR);
-			Sleep(2000);
-			enemy.Attack(player);
-			Sleep(2000);
-		}
+		////Combat state
+		//if (state == 1)
+		//{
+		//	player->Attack(enemyPTR);
+		//	Sleep(2000);
+		//	enemy.Attack(player);
+		//	Sleep(2000);
+		//}
 	}
 }

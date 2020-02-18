@@ -71,3 +71,8 @@ Enemy::Enemy(int hitPoint, int damage, int armorClass, int speed)
 Enemy::Enemy()
 {
 }
+
+Enemy::~Enemy()
+{
+	map = nullptr;
+}

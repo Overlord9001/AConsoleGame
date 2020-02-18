@@ -23,6 +23,7 @@ public:
 
 	Enemy(int hitPoint, int damage, int armorClass, int speed);
 	Enemy();
+	~Enemy();
 
 };
 
