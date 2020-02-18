@@ -31,7 +31,7 @@ using namespace irrklang;
 #define ARROW_DOWN  0x50
 
 Player * player = Player::Instance();
-list<Enemy*> enemies;
+list<Enemy*> enemies; // we use list because its easier to add and remove individual elements in runtime
 
 void Reset()
 {
@@ -51,6 +51,7 @@ void Reset()
 	map->MapSetup(MAPX, MAPY);
 	delete player;
 	player = Player::Instance();
+	player->item = 3;
 	map->map[player->y][player->x] = PLAYER;
 
 	system("cls");
@@ -64,10 +65,6 @@ void Combat(Player * player, Enemy * enemy)
 
 	while (enemyAlive)
 	{
-		//Goblin * r = nullptr;
-		//if (strcmp(typeid(enemy).name(), "Goblin")) // check if enemy is a goblin
-		//	r = (Goblin*)enemy;
-
 		if (playerTurn == true)
 		{
 			std::cout << "A to attack, U to use item\n\n"; 
@@ -101,8 +98,6 @@ void Combat(Player * player, Enemy * enemy)
 				player->item++;
 			}
 			enemyAlive = false;
-			//enemies.erase(find(enemies.begin(), enemies.end(), enemy)); // remove from vector
-			//enemies.erase(remove(enemies.begin(), enemies.end(),)
 			enemies.remove(enemy);
 			delete enemy;
 			system("cls"); // clear screen
@@ -130,8 +125,6 @@ int main()
 	ShowWindow(console, SW_SHOWMAXIMIZED);
 
 	Map* map = Map::Instance();
-	
-	//map->MapSetup(MAPX, MAPY);
 
 	ISoundEngine * soundEngine = createIrrKlangDevice();
 	soundEngine->play2D("bgMusic.wav");
@@ -140,17 +133,8 @@ int main()
 	Reset();
 	map->DrawMap();
 
-	//enemies.push_back(new Goblin(10, 10, 10, 10));
-	//enemies.push_back(new Kobold(10, 10, 10, 10));
-	//enemies.push_back(new Lizardman(10, 10, 10, 10));
-	//enemies.push_back(new Orc(10, 10, 10, 10));
-	//enemies.push_back(new BlackDragon(10, 10, 10, 10));
-
 	int oldX = 0;
 	int oldY = 0;
-	//map->map[player->y][player->x] = PLAYER;
-
-	//map->DrawMap();
 
 	int updateEnemies = 0;
 	bool run = true;
@@ -266,14 +250,5 @@ int main()
 		map->SetCursorPosition(0, 0);
 
 #pragma endregion
-
-		////Combat state
-		//if (state == 1)
-		//{
-		//	player->Attack(enemyPTR);
-		//	Sleep(2000);
-		//	enemy.Attack(player);
-		//	Sleep(2000);
-		//}
 	}
 }
