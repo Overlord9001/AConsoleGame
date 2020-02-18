@@ -6,7 +6,7 @@ public:
 	void Rage();
 	bool Move() override;
 
-	Orc(int hitPoint, int damage, int armorClass, int speed);
+	Orc(int hitPoint, int damage, int armorClass);
 	Orc();
 };
 

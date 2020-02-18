@@ -62,12 +62,22 @@ void Enemy::Attack(Player * player)
 	}
 }
 
-Enemy::Enemy(int hitPoint, int damage, int armorClass, int speed)
+Enemy::Enemy(int hitPoint, int damage, int armorClass)
 {
 	x = 15;
 	y = 15;
+	this->maxHealth = hitPoint;
+	this->damage = damage;
+	this->armor = armorClass;
+	currentHealth = maxHealth;
 }
 
 Enemy::Enemy()
 {
+
+}
+
+Enemy::~Enemy()
+{
+	map = nullptr;
 }

@@ -7,7 +7,7 @@ public:
 	void SpearThrow();
 	bool Move() override;
 
-	Lizardman(int hitPoint, int damage, int armorClass, int speed);
+	Lizardman(int hitPoint, int damage, int armorClass);
 	Lizardman();
 };
 

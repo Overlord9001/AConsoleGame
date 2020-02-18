@@ -55,7 +55,7 @@ bool Kobold::Move()
 	return false;
 }
 
-Kobold::Kobold(int hitPoint, int damage, int armorClass, int speed) : Enemy (hitPoint, damage, armorClass, speed)
+Kobold::Kobold(int hitPoint, int damage, int armorClass) : Enemy (hitPoint, damage, armorClass)
 {
 	icon = KOBOLD;
 }
