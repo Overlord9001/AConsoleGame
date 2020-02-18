@@ -6,7 +6,7 @@ public:
 	void BreathAttack();
 	bool Move() override;
 
-	BlackDragon(int hitPoint, int damage, int armorClass, int speed);
+	BlackDragon(int hitPoint, int damage, int armorClass);
 	~BlackDragon();
 };
 

@@ -62,7 +62,7 @@ void Enemy::Attack(Player * player)
 	}
 }
 
-Enemy::Enemy(int hitPoint, int damage, int armorClass, int speed)
+Enemy::Enemy(int hitPoint, int damage, int armorClass)
 {
 	x = 15;
 	y = 15;

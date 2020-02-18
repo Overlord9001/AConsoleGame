@@ -15,6 +15,12 @@
 #define BLACKDRAGON 'B'
 #define BLACKDRAGONCOLOR 5 // purple
 #define TEXTWHITE SetConsoleTextAttribute(hOut, 15)
+#define TEXTPLAYER SetConsoleTextAttribute(hOut, PLAYERCOLOR)
+#define TEXTGOBLIN SetConsoleTextAttribute(hOut, GOBLINCOLOR)
+#define TEXTKOBOLD SetConsoleTextAttribute(hOut, KOBOLDCOLOR)
+#define TEXTLIZARDMAN SetConsoleTextAttribute(hOut, LIZARDMANCOLOR)
+#define TEXTORC SetConsoleTextAttribute(hOut, ORCCOLOR)
+#define TEXTBLACKDRAGON SetConsoleTextAttribute(hOut, BLACKDRAGONCOLOR)
 
 
 class Map
