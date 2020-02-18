@@ -100,6 +100,10 @@ void Combat(Player * player, Enemy * enemy)
 			{
 				player->item++;
 			}
+			else
+			{
+				player->gold += 12;
+			}
 			enemyAlive = false;
 			//enemies.erase(find(enemies.begin(), enemies.end(), enemy)); // remove from vector
 			//enemies.erase(remove(enemies.begin(), enemies.end(),)

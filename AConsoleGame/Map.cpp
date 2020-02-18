@@ -125,37 +125,47 @@ void Map::DrawMap()
 		switch (y) // write tutorial
 		{
 		case 0:
-			cout << "Move your charater: " << PLAYER << " with the arrowkeys";
+			cout << "Move your character: ";
+			TEXTPLAYER;
+			cout << PLAYER;
+			TEXTWHITE;
+			cout << " with the arrowkeys";
 			break;
 		case 1:
 			cout << "Move into an enemy to begin combat";
 			break;
 		case 2:
-			SetConsoleTextAttribute(hOut, GOBLINCOLOR);
+			cout << "Press M to mute/unmute the music.";
+			break;
+		case 3:
+			cout << "Press P to to stop/restart the music.";
+			break;
+		case 4:
+			TEXTGOBLIN;
 			cout << GOBLIN;
 			TEXTWHITE;
 			cout << " is a goblin";
 			break;
-		case 3:
-			SetConsoleTextAttribute(hOut, ORCCOLOR);
+		case 5:
+			TEXTORC;
 			cout << ORC;
 			TEXTWHITE;
 			cout << " is an orc";
 			break;
-		case 4:
-			SetConsoleTextAttribute(hOut, LIZARDMANCOLOR);
+		case 6:
+			TEXTLIZARDMAN;
 			cout << LIZARDMAN;
 			TEXTWHITE;
 			cout << " is a lizardman";
 			break;
-		case 5:
-			SetConsoleTextAttribute(hOut, KOBOLDCOLOR);
+		case 7:
+			TEXTKOBOLD;
 			cout << KOBOLD;
 			TEXTWHITE;
 			cout << " is a kobold";
 			break;
-		case 6:
-			SetConsoleTextAttribute(hOut, BLACKDRAGONCOLOR);
+		case 8:
+			TEXTBLACKDRAGON;
 			cout << BLACKDRAGON;
 			TEXTWHITE;
 			cout << " is a blackdragon";
