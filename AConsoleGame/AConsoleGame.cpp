@@ -64,7 +64,12 @@ void Shop()
 
 	while (browsing == true)
 	{
-		std::cout << "Current Gold:  " << (player->gold) << "G\n\n";
+		std::cout << "Current Gold:  " << (player->gold) << "\n";
+		std::cout << "Current Damage:  " << (player->damage) << "\n";
+		std::cout << "Current Health:  " << (player->maxHealth) << "G\n";
+		std::cout << "Current Armor:  " << (player->armor) << "\n";
+		std::cout << "Current Potions:  " << (player->item) << "\n\n";
+
 		std::cout << "1) Upgrade Damage: " << (5 + (shopLevel * 2)) << "G\n";
 		std::cout << "2) Upgrade Health: " << (4 + (shopLevel * 2)) << "G\n";
 		std::cout << "3) Upgrade Armor: " << (7 + (shopLevel * 2)) << "G\n";
@@ -79,7 +84,7 @@ void Shop()
 			{
 				player->gold -= (5 + (shopLevel * 2));
 			    shopLevel++;
-				player->damage = (int)(player->damage*1.25);
+				player->damage = (int)(player->damage++);
 			}
 		}
 
@@ -89,7 +94,7 @@ void Shop()
 			{
 				player->gold -= (4 + (shopLevel * 2));
 				shopLevel++;
-				player->maxHealth = (int)(player->maxHealth*1.25);
+				player->maxHealth = (int)(player->maxHealth += 10);
 			}
 		}
 

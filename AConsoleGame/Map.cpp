@@ -139,30 +139,33 @@ void Map::DrawMap()
 			cout << "Press P to to stop/restart the music.";
 			break;
 		case 4:
+			cout << "Enter S on the map to enter shop.";
+			break;
+		case 5:
 			TEXTGOBLIN;
 			cout << GOBLIN;
 			TEXTWHITE;
 			cout << " is a Goblin";
 			break;
-		case 5:
+		case 6:
 			TEXTORC;
 			cout << ORC;
 			TEXTWHITE;
 			cout << " is an Orc";
 			break;
-		case 6:
+		case 7:
 			TEXTLIZARDMAN;
 			cout << LIZARDMAN;
 			TEXTWHITE;
 			cout << " is a Lizardman";
 			break;
-		case 7:
+		case 8:
 			TEXTKOBOLD;
 			cout << KOBOLD;
 			TEXTWHITE;
 			cout << " is a Kobold";
 			break;
-		case 8:
+		case 9:
 			TEXTBLACKDRAGON;
 			cout << BLACKDRAGON;
 			TEXTWHITE;
