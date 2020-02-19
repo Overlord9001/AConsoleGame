@@ -31,6 +31,7 @@ using namespace irrklang;
 
 Player * player = Player::Instance();
 list<Enemy*> enemies; // we use list because its easier to add and remove individual elements in runtime
+int shopLevel = 0;
 
 void Reset()
 {
@@ -54,6 +55,76 @@ void Reset()
 	map->map[player->y][player->x] = PLAYER;
 
 	system("cls");
+}
+
+void Shop()
+{
+	system("cls"); // clear screen
+	bool browsing = true;
+
+	while (browsing == true)
+	{
+		std::cout << "Current Gold:  " << (player->gold) << "G\n\n";
+		std::cout << "1) Upgrade Damage: " << (5 + (shopLevel * 2)) << "G\n";
+		std::cout << "2) Upgrade Health: " << (4 + (shopLevel * 2)) << "G\n";
+		std::cout << "3) Upgrade Armor: " << (7 + (shopLevel * 2)) << "G\n";
+		std::cout << "4) Buy Potion: " << (3 + (shopLevel * 2)) << "G\n";
+		std::cout << "Press E to Exit";
+
+		char tempChar = _getch();
+
+		if (tempChar == '1')
+		{
+			if (player->gold >= (5 + (shopLevel * 2)))
+			{
+				player->gold -= (5 + (shopLevel * 2));
+			    shopLevel++;
+				player->damage = (int)(player->damage*1.25);
+			}
+		}
+
+		if (tempChar == '2')
+		{
+			if (player->gold >= (4 + (shopLevel * 2)))
+			{
+				player->gold -= (4 + (shopLevel * 2));
+				shopLevel++;
+				player->maxHealth = (int)(player->maxHealth*1.25);
+			}
+		}
+
+		if (tempChar == '3')
+		{
+			if (player->gold >= (7 + (shopLevel * 2)))
+			{
+				player->gold -= (7 + (shopLevel * 2));
+				shopLevel++;
+				player->armor++;
+			}
+		}
+
+		if (tempChar == '4')
+		{
+			if (player->gold >= (3 + (shopLevel * 2)))
+			{
+				player->gold -= (3 + (shopLevel * 2));
+				shopLevel++;
+				player->item++;
+			}
+		}
+
+		system("cls"); // clear screen
+
+		if (tempChar == 'e')
+		{
+			player->y += 2;
+			browsing = false;
+			Map::Instance()->DrawMap(); // draw map again
+		}
+
+		
+	}
+
 }
 
 void Combat(Player * player, Enemy * enemy)
@@ -303,5 +374,20 @@ int main()
 		map->SetCursorPosition(0, 0);
 
 #pragma endregion
+
+#pragma region Enter Shop
+
+		map->SetCursorPosition(50, 1);
+		std::cout << "S";
+		map->SetCursorPosition(0, 0);
+
+		if (player->x == 25 && player->y == 1)
+		{
+			Shop();
+		}
+#pragma endregion
+
 	}
+
 }
+
