@@ -79,7 +79,7 @@ void Shop()
 			{
 				player->gold -= (5 + (shopLevel * 2));
 			    shopLevel++;
-				player->damage = (int)(player->damage*1.25);
+				player->damage = (int)(player->damage++);
 			}
 		}
 
@@ -89,7 +89,7 @@ void Shop()
 			{
 				player->gold -= (4 + (shopLevel * 2));
 				shopLevel++;
-				player->maxHealth = (int)(player->maxHealth*1.25);
+				player->maxHealth = (int)(player->maxHealth += 10);
 			}
 		}
 
