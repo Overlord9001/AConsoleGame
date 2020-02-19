@@ -48,7 +48,7 @@ void Player::Attack(Enemy * enemy)
 	}
 	else
 	{
-		std::cout << "Your strike was too shallow to deal damage";
+		std::cout << "Your strike was too shallow to deal damage" << endl;
 	}
 	TEXTWHITE;
 }
