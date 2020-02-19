@@ -4,7 +4,6 @@
 class Kobold : public Enemy
 {
 public:
-	void SlingShot();
 	bool Move() override;
 	void Attack(Player * player) override;
 

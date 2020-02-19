@@ -17,7 +17,6 @@ public:
 
 	static Player * Instance();
 	void Attack(Enemy * enemy);
-	void SpecialMove(Enemy * enemy);
 	void UseItem();
 
 	~Player();

@@ -1,10 +1,6 @@
 #include "BlackDragon.h"
 #include "Map.h"
 
-void BlackDragon::BreathAttack()
-{
-}
-
 bool BlackDragon::Move()
 {
 	Map* map = Map::Instance();
