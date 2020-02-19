@@ -1,4 +1,3 @@
-
 // includes
 #include <iostream>
 #include <string>
@@ -63,11 +62,33 @@ void Combat(Player * player, Enemy * enemy)
 	bool enemyAlive = true;
 	bool playerTurn = true;
 
+	string attacker;
+
+	switch (enemy->icon) // determines which enemy the player are fighting
+	{
+	case 'G':
+		attacker = "Goblin";
+		break;
+	case 'O':
+		attacker = "Orc";
+		break;
+	case 'K':
+		attacker = "Kobold";
+		break;
+	case 'L':
+		attacker = "Lizardman";
+		break;
+	case 'B':
+		attacker = "Black Dragon";
+		break;
+	}
+	cout << "Your enemy is a(n) " << attacker << endl; // tells player which enemy they're fighting
+
 	while (enemyAlive)
 	{
 		if (playerTurn == true)
 		{
-			std::cout << "A to attack, U to use item\n\n"; 
+			cout << "A to attack, U to use item\n\n"; 
 			char tempChar = _getch();
 
 			if (tempChar == 'a')
@@ -79,11 +100,10 @@ void Combat(Player * player, Enemy * enemy)
 
 			if (tempChar == 'u')
 			{
-					player->UseItem();
-					playerTurn = false;
-					tempChar = 'P';
+				player->UseItem();
+				playerTurn = false;
+				tempChar = 'P';
 			}
-			
 		}
 		else
 		{
@@ -116,7 +136,6 @@ void Combat(Player * player, Enemy * enemy)
 		//Decision in combat
 	}
 	
-
 	Map::Instance()->DrawMap(); // draw map again
 }
 
