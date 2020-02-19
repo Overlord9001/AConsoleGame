@@ -43,7 +43,7 @@ bool Orc::Move()
 	return false;
 }
 
-Orc::Orc(int hitPoint, int damage, int armorClass) : Enemy(hitPoint, damage, armorClass)
+Orc::Orc(int hitPoint, int damage = 5, int armorClass = 1) : Enemy(hitPoint, damage, armorClass)
 {
 	icon = ORC;
 }

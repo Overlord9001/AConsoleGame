@@ -5,8 +5,6 @@
 
 Map* map = Map::Instance();
 
-
-
 bool Enemy::Move()
 {
 	int oldY = y;

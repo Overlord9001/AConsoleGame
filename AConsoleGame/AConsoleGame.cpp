@@ -154,23 +154,15 @@ int main()
 		{
 		case ARROW_UP:
 			player->y--;
-			updateEnemies++;
-			spawnEnemies++;
 			break;
 		case ARROW_DOWN:
 			player->y++;
-			updateEnemies++;
-			spawnEnemies++;
 			break;
 		case ARROW_RIGHT:
 			player->x++;
-			updateEnemies++;
-			spawnEnemies++;
 			break;
 		case ARROW_LEFT:
 			player->x--;
-			updateEnemies++;
-			spawnEnemies++;
 			break;
 		case 'm': //mutes the music
 			if (soundEngine->getSoundVolume() != 0)
@@ -192,6 +184,16 @@ int main()
 				soundEngine->play2D("bgMusic.wav"); //starts
 			}
 			break;
+		}
+
+		if (player->x != oldX || player->y != oldY)
+		{
+			updateEnemies++;
+			spawnEnemies++;
+			if (player->currentHealth < player->maxHealth)
+			{
+				player->currentHealth++;
+			}
 		}
 
 		if (map->map[player->y][player->x] == '#') // if moving into a wall
