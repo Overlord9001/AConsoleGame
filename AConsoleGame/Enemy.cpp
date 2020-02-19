@@ -1,7 +1,6 @@
 #include "Map.h"
-#include <iostream>
+
 #include "Enemy.h"
-#include <time.h>
 
 Map* map = Map::Instance();
 
@@ -56,12 +55,12 @@ void Enemy::Attack(Player * player)
 	if (currentDamage > player->armor)
 	{
 		player->currentHealth -= (currentDamage - player->armor);
-		std::cout << "Enemy strikes you for " << (currentDamage - player->armor) << " damage \n";
-		std::cout << "You have " << player->currentHealth << " health left \n \n";
+		cout << "Enemy strikes you for " << (currentDamage - player->armor) << " damage \n";
+		cout << "You have " << player->currentHealth << " health left \n \n";
 	}
 	else
 	{
-		std::cout << "Your armor repels the attack";
+		cout << "Your armor repels the attack";
 	}
 }
 

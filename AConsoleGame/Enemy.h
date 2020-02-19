@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <iostream>
+#include <time.h>
 #include "Player.h"
 
 
@@ -19,7 +21,7 @@ public:
 
 	virtual bool Move(); // return true if moving into the player to begin combat
 	void UseItem();
-	void Attack(Player * player);
+	virtual void Attack(Player * player);
 
 	Enemy(int hitPoint, int damage, int armorClass);
 	Enemy();
