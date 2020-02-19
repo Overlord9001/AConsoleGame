@@ -1,4 +1,3 @@
-
 // includes
 #include <iostream>
 #include <string>
@@ -42,11 +41,11 @@ void Reset()
 	}
 	enemies.clear(); // clear vector
 
-	enemies.push_back(new Goblin(50, 10, 10));
-	enemies.push_back(new Kobold(10, 10, 10));
-	enemies.push_back(new Lizardman(10, 10, 10));
-	enemies.push_back(new Orc(10, 10, 10));
-	enemies.push_back(new BlackDragon(10, 10, 10));
+	enemies.push_back(new Goblin(10, 2, 0));
+	enemies.push_back(new Kobold(15, 3, 0));
+	enemies.push_back(new Lizardman(30, 4, 2));
+	enemies.push_back(new Orc(20, 5, 1));
+	enemies.push_back(new BlackDragon(50, 10, 5));
 
 	map->MapSetup(MAPX, MAPY);
 	delete player;
@@ -60,14 +59,36 @@ void Reset()
 void Combat(Player * player, Enemy * enemy)
 {
 	system("cls"); // clear screen
-	bool combatInProgress = true;
+	bool enemyAlive = true;
 	bool playerTurn = true;
 
-	while (combatInProgress)
+	string attacker;
+
+	switch (enemy->icon) // determines which enemy the player are fighting
+	{
+	case 'G':
+		attacker = "Goblin";
+		break;
+	case 'O':
+		attacker = "Orc";
+		break;
+	case 'K':
+		attacker = "Kobold";
+		break;
+	case 'L':
+		attacker = "Lizardman";
+		break;
+	case 'B':
+		attacker = "Black Dragon";
+		break;
+	}
+	cout << "Your enemy is a(n) " << attacker << "\nTheir stats are:\n" << "Average damage: " << enemy->damage << "\nHealth: " << enemy->currentHealth << "\nArmor Class: " << enemy->armor << endl; // tells player which enemy they're fighting adn their stats
+
+	while (enemyAlive)
 	{
 		if (playerTurn == true)
 		{
-			std::cout << "A to attack, U to use item\n\n"; 
+			cout << "A to attack, U to use item\n\n"; 
 			char tempChar = _getch();
 
 			if (tempChar == 'a')
@@ -79,11 +100,10 @@ void Combat(Player * player, Enemy * enemy)
 
 			if (tempChar == 'u')
 			{
-					player->UseItem();
-					playerTurn = false;
-					tempChar = 'P';
+				player->UseItem();
+				playerTurn = false;
+				tempChar = 'P';
 			}
-			
 		}
 		else
 		{
@@ -101,7 +121,8 @@ void Combat(Player * player, Enemy * enemy)
 			{
 				player->gold += 12;
 			}
-			combatInProgress = false;
+			player->difficultyIncrease += 0.05f;
+			enemyAlive = false;
 			enemies.remove(enemy);
 			delete enemy;
 			system("cls"); // clear screen
@@ -116,7 +137,6 @@ void Combat(Player * player, Enemy * enemy)
 		//Decision in combat
 	}
 	
-
 	Map::Instance()->DrawMap(); // draw map again
 }
 
@@ -141,6 +161,7 @@ int main()
 	int oldY = 0;
 
 	int updateEnemies = 0;
+	int spawnEnemies = 0;
 	bool run = true;
 	while (run) // game loop
 	{
@@ -152,19 +173,15 @@ int main()
 		{
 		case ARROW_UP:
 			player->y--;
-			updateEnemies++;
 			break;
 		case ARROW_DOWN:
 			player->y++;
-			updateEnemies++;
 			break;
 		case ARROW_RIGHT:
 			player->x++;
-			updateEnemies++;
 			break;
 		case ARROW_LEFT:
 			player->x--;
-			updateEnemies++;
 			break;
 		case 'm': //mutes the music
 			if (soundEngine->getSoundVolume() != 0)
@@ -186,6 +203,16 @@ int main()
 				soundEngine->play2D("bgMusic.wav"); //starts
 			}
 			break;
+		}
+
+		if (player->x != oldX || player->y != oldY)
+		{
+			updateEnemies++;
+			spawnEnemies++;
+			if (player->currentHealth < player->maxHealth)
+			{
+				player->currentHealth++;
+			}
 		}
 
 		if (map->map[player->y][player->x] == '#') // if moving into a wall
@@ -224,7 +251,29 @@ int main()
 			}
 			updateEnemies = 0;
 		}
-
+		if (spawnEnemies >= 20)
+		{
+			switch (rand() % 5)
+			{
+			case 0:
+				enemies.push_back(new Goblin(10 + 10.0f * player->difficultyIncrease, 2 + 2.0f * player->difficultyIncrease, 0));
+				break;
+			case 1:
+				enemies.push_back(new Orc(20 + 20.0f * player->difficultyIncrease, 5 + 5.0f * player->difficultyIncrease, 1 + 1.0f * player->difficultyIncrease));
+				break;
+			case 2:
+				enemies.push_back(new Kobold(15 + 15.0f * player->difficultyIncrease, 3 + 3.0f * player->difficultyIncrease, 0.5f + 0.5f * player->difficultyIncrease));
+				break;
+			case 3:
+				enemies.push_back(new Lizardman(30 + 50.0f * player->difficultyIncrease, 4 + 4.0f * player->difficultyIncrease, 2 + 2.0f * player->difficultyIncrease));
+				break;
+			case 4:
+				enemies.push_back(new BlackDragon(50 + 50.0f * player->difficultyIncrease, 10 + 10.0f * player->difficultyIncrease, 5 + 5.0f * player->difficultyIncrease));
+				break;
+			}
+			spawnEnemies = 0;
+		}
+		// flyt til drawmap hvis man kun får ting når man har kæmpet
 #pragma region DrawingStats
 
 		map->SetCursorPosition(0, MAPY + 2);
