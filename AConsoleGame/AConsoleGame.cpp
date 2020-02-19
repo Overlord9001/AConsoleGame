@@ -34,6 +34,7 @@ Player * player = Player::Instance();
 Enemy * enemyPTR = &enemy;
 int state = 0;
 vector<Enemy*> enemies;
+bool enemyAlive = false;
 
 void Combat(Player * player, Enemy * enemy)
 {
@@ -180,6 +181,7 @@ int main()
 				{
 					// begin combat
 					Combat(player, enemy);
+					enemyAlive = true;
 				}
 			}
 
