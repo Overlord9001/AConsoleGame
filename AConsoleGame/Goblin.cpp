@@ -15,29 +15,29 @@ bool Goblin::Move()
 	int r = rand() % 4;
 	switch (r)
 	{
-	case 0:
+	case 0: // down-right
 		x++;
 		y++;
 		break;
-	case 1:
+	case 1: // up-right
 		x++;
 		y--;
 		break;
-	case 2:
+	case 2: // down-left
 		x--;
 		y++;
 		break;
-	case 3:
+	case 3: // up-left
 		x--;
 		y--;
 		break;
 	}
 
-	if (map->map[y][x] == ' ')
+	if (map->map[y][x] == ' ') // clear space
 	{
 		map->Move(oldX, oldY, x, y, icon);
 	}
-	else if (map->map[y][x] == PLAYER)
+	else if (map->map[y][x] == PLAYER) // move into player, start combat
 	{
 		map->Move(oldX, oldY, x, y, icon);
 		return true;

@@ -14,6 +14,7 @@ bool Orc::Move()
 	int oldX = x;
 	Player* player = Player::Instance();
 
+	// chase player
 	if (player->x > x)
 	{
 		x++;
@@ -31,11 +32,11 @@ bool Orc::Move()
 		y--;
 	}
 
-	if (map->map[y][x] == ' ')
+	if (map->map[y][x] == ' ') // clear space
 	{
 		map->Move(oldX, oldY, x, y, icon);
 	}
-	else if (map->map[y][x] == PLAYER)
+	else if (map->map[y][x] == PLAYER) // move into player, start combat
 	{
 		map->Move(oldX, oldY, x, y, icon);
 		return true;

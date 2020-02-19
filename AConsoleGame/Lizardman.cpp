@@ -15,7 +15,7 @@ bool Lizardman::Move()
 	int oldX = x;
 	Player* player = Player::Instance();
 
-	if (abs(player->x - x) > 3)
+	if (abs(player->x - x) > 3) // if further than 3 tiles away from player x, move closer to player
 	{
 		if (player->x > x)
 		{
@@ -26,7 +26,7 @@ bool Lizardman::Move()
 			x--;
 		}
 	}
-	else if (abs(player->y - y) > 3)
+	else if (abs(player->y - y) > 3) // if further than 3 tiles away from player y, move closer to player
 	{
 		if (player->y > y)
 		{
@@ -37,7 +37,7 @@ bool Lizardman::Move()
 			y--;
 		}
 	}
-	else if (abs(player->x - x) < 3 || abs(player->y - y) < 3)
+	else if (abs(player->x - x) < 3 || abs(player->y - y) < 3) // if closer than 3 tiles away from player, move away from player
 	{
 		if (player->x > x)
 		{
@@ -58,11 +58,11 @@ bool Lizardman::Move()
 	}
 
 
-	if (map->map[y][x] == ' ')
+	if (map->map[y][x] == ' ') // clear space
 	{
 		map->Move(oldX, oldY, x, y, icon);
 	}
-	else if (map->map[y][x] == PLAYER)
+	else if (map->map[y][x] == PLAYER) // move into player, start combat
 	{
 		map->Move(oldX, oldY, x, y, icon);
 		return true;

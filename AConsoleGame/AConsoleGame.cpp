@@ -228,11 +228,12 @@ int main()
 {
 	srand(static_cast<int>(time(0)));
 
-	HWND console = GetConsoleWindow(); //Window fullscreen
-	ShowWindow(console, SW_SHOWMAXIMIZED);
+	HWND console = GetConsoleWindow(); 
+	ShowWindow(console, SW_SHOWMAXIMIZED);	//Window fullscreen
 
 	Map* map = Map::Instance();
 
+	// sound engine
 	ISoundEngine * soundEngine = createIrrKlangDevice();
 	soundEngine->play2D("bgMusic.wav");
 	system("cls");
@@ -361,8 +362,6 @@ int main()
 		{
 			Shop();
 		}
-
 	}
-
 }
 

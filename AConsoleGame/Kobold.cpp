@@ -16,6 +16,7 @@ bool Kobold::Move()
 	int oldX = x;
 	int r = rand() % 2;
 
+	// moves horizontally and vertically in alternating fashion
 	if (horizontal)
 	{
 		if (r == 0)
@@ -43,11 +44,11 @@ bool Kobold::Move()
 		vertical = false;
 	}
 
-	if (map->map[y][x] == ' ')
+	if (map->map[y][x] == ' ') // clear space
 	{
 		map->Move(oldX, oldY, x, y, icon);
 	}
-	else if (map->map[y][x] == PLAYER)
+	else if (map->map[y][x] == PLAYER) // move into player, start combat
 	{
 		map->Move(oldX, oldY, x, y, icon);
 		return true;

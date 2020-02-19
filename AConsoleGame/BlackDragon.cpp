@@ -49,17 +49,17 @@ bool BlackDragon::Move()
 		break;
 	}
 
-	if (x < 0 || y < 0 || x > MAPX - 1 || y > MAPY - 1)
+	if (x < 0 || y < 0 || x > MAPX - 1 || y > MAPY - 1) // if outside map, cancle move
 	{
 		x = oldX;
 		y = oldY;
 	}
 	
-	if (map->map[y][x] == ' ')
+	if (map->map[y][x] == ' ') // clear space
 	{
 		map->Move(oldX, oldY, x, y, icon);
 	}
-	else if (map->map[y][x] == PLAYER)
+	else if (map->map[y][x] == PLAYER) // move into player, start combat
 	{
 		map->Move(oldX, oldY, x, y, icon);
 		return true;
