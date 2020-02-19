@@ -13,6 +13,7 @@ public:
 	int item;
 	int x;
 	int y;
+	float difficultyIncrease = 0.0f;
 
 	static Player * Instance();
 	void Attack(Enemy * enemy);
