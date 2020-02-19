@@ -31,9 +31,14 @@ bool Orc::Move()
 		y--;
 	}
 
-	if (map->map[y][x] == ' ' || map->map[y][x] == PLAYER)
+	if (map->map[y][x] == ' ')
 	{
 		map->Move(oldX, oldY, x, y, icon);
+	}
+	else if (map->map[y][x] == PLAYER)
+	{
+		map->Move(oldX, oldY, x, y, icon);
+		return true;
 	}
 	else // if trying to move into a wall
 	{

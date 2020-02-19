@@ -33,14 +33,14 @@ bool Goblin::Move()
 		break;
 	}
 
-	if (map->map[y][x] == PLAYER)
-	{
-		map->Move(oldX, oldY, x, y, GOBLIN);
-		return true;
-	}
-	else if (map->map[y][x] == ' ')
+	if (map->map[y][x] == ' ')
 	{
 		map->Move(oldX, oldY, x, y, icon);
+	}
+	else if (map->map[y][x] == PLAYER)
+	{
+		map->Move(oldX, oldY, x, y, icon);
+		return true;
 	}
 	else // if trying to move into a wall
 	{

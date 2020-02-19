@@ -144,31 +144,31 @@ void Map::DrawMap()
 			TEXTGOBLIN;
 			cout << GOBLIN;
 			TEXTWHITE;
-			cout << " is a goblin";
+			cout << " is a Goblin";
 			break;
 		case 5:
 			TEXTORC;
 			cout << ORC;
 			TEXTWHITE;
-			cout << " is an orc";
+			cout << " is an Orc";
 			break;
 		case 6:
 			TEXTLIZARDMAN;
 			cout << LIZARDMAN;
 			TEXTWHITE;
-			cout << " is a lizardman";
+			cout << " is a Lizardman";
 			break;
 		case 7:
 			TEXTKOBOLD;
 			cout << KOBOLD;
 			TEXTWHITE;
-			cout << " is a kobold";
+			cout << " is a Kobold";
 			break;
 		case 8:
 			TEXTBLACKDRAGON;
 			cout << BLACKDRAGON;
 			TEXTWHITE;
-			cout << " is a blackdragon";
+			cout << " is a Black Dragon";
 			break;
 		}
 

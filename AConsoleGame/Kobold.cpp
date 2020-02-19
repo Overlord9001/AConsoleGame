@@ -47,6 +47,11 @@ bool Kobold::Move()
 	{
 		map->Move(oldX, oldY, x, y, icon);
 	}
+	else if (map->map[y][x] == PLAYER)
+	{
+		map->Move(oldX, oldY, x, y, icon);
+		return true;
+	}
 	else // if trying to move into a wall
 	{
 		y = oldY;
