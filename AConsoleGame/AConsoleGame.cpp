@@ -66,7 +66,7 @@ void Shop()
 	{
 		std::cout << "Current Gold:  " << (player->gold) << "\n";
 		std::cout << "Current Damage:  " << (player->damage) << "\n";
-		std::cout << "Current Health:  " << (player->maxHealth) << "G\n";
+		std::cout << "Current Health:  " << (player->maxHealth) << "\n";
 		std::cout << "Current Armor:  " << (player->armor) << "\n";
 		std::cout << "Current Potions:  " << (player->item) << "\n\n";
 
