@@ -5,8 +5,9 @@ class Orc : public Enemy
 public:
 	void Rage();
 	bool Move() override;
+	void Attack(Player * player) override;
 
-	Orc(int hitPoint, int damage, int armorClass, int speed);
+	Orc(int hitPoint, int damage, int armorClass);
 	Orc();
 };
 

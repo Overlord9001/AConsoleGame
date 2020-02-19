@@ -1,11 +1,8 @@
 #include "Map.h"
-#include <iostream>
+
 #include "Enemy.h"
-#include <time.h>
 
 Map* map = Map::Instance();
-
-
 
 bool Enemy::Move()
 {
@@ -28,9 +25,14 @@ bool Enemy::Move()
 		break;
 	}
 
-	if(map->map[y][x] == ' ' || map->map[y][x] == PLAYER)
+	if(map->map[y][x] == ' ')
 	{
 		map->Move(oldX, oldY, x, y, icon);
+	}
+	else if (map->map[y][x] == PLAYER)
+	{
+		map->Move(oldX, oldY, x, y, icon);
+		return true;
 	}
 	else // if trying to move into a wall
 	{
@@ -53,21 +55,37 @@ void Enemy::Attack(Player * player)
 	if (currentDamage > player->armor)
 	{
 		player->currentHealth -= (currentDamage - player->armor);
-		std::cout << "Enemy strikes you for " << (currentDamage - player->armor) << " damage \n";
-		std::cout << "You have " << player->currentHealth << " health left \n \n";
+		cout << "Enemy strikes you for " << (currentDamage - player->armor) << " damage \n";
+		cout << "You have " << player->currentHealth << " health left \n \n";
 	}
 	else
 	{
-		std::cout << "Your armor repels the attack";
+		cout << "Your armor repels the attack";
 	}
 }
 
-Enemy::Enemy(int hitPoint, int damage, int armorClass, int speed)
+Enemy::Enemy(int hitPoint, int damage, int armorClass)
 {
-	x = 15;
-	y = 15;
+	Player* player = Player::Instance();
+
+	do // spawn on a random place that is not on top of the player
+	{
+		x = rand() % (MAPX - 2) + 1;
+		y = rand() % (MAPY - 2) + 1;
+	} while (player->x == x && player->y == y);
+
+	this->maxHealth = hitPoint;
+	this->damage = damage;
+	this->armor = armorClass;
+	currentHealth = maxHealth;
 }
 
 Enemy::Enemy()
 {
+
+}
+
+Enemy::~Enemy()
+{
+	map = nullptr;
 }

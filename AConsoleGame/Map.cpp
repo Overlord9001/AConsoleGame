@@ -35,25 +35,25 @@ void Map::Move(int oldX, int oldY, int newX, int newY, char icon)
 	switch (icon)
 	{
 	case PLAYER: // player
-		SetConsoleTextAttribute(hOut, PLAYERCOLOR); // blue
+		TEXTPLAYER; // blue
 		break;
 	case 'E': // enemy
 		SetConsoleTextAttribute(hOut, 4); // deep red
 		break;
 	case GOBLIN:
-		SetConsoleTextAttribute(hOut, GOBLINCOLOR); // green
+		TEXTGOBLIN; // green
 		break;
 	case KOBOLD:
-		SetConsoleTextAttribute(hOut, KOBOLDCOLOR); // red
+		TEXTKOBOLD; // red
 		break;
 	case LIZARDMAN:
-		SetConsoleTextAttribute(hOut, LIZARDMANCOLOR); // turqoise
+		TEXTLIZARDMAN; // turqoise
 		break;
 	case ORC:
-		SetConsoleTextAttribute(hOut, ORCCOLOR); // yellow
+		TEXTORC; // yellow
 		break;
 	case BLACKDRAGON:
-		SetConsoleTextAttribute(hOut, BLACKDRAGONCOLOR); // purple
+		TEXTBLACKDRAGON; // purple
 		break;
 	}
 
@@ -63,7 +63,7 @@ void Map::Move(int oldX, int oldY, int newX, int newY, char icon)
 	SetCursorPosition(0, 0);
 
 	// set the color back to white
-	SetConsoleTextAttribute(hOut, 15);
+	TEXTWHITE;
 
 	// update the array
 	map[oldY][oldX] = ' ';
@@ -99,36 +99,76 @@ void Map::DrawMap()
 			switch (map[y][x]) // draw with the correct color
 			{
 			case PLAYER:
-				SetConsoleTextAttribute(hOut, PLAYERCOLOR);
+				TEXTPLAYER;
 				break;
 			case GOBLIN:
-				SetConsoleTextAttribute(hOut, GOBLINCOLOR);
+				TEXTGOBLIN;
 				break;
 			case KOBOLD:
-				SetConsoleTextAttribute(hOut, KOBOLDCOLOR);
+				TEXTKOBOLD;
 				break;
 			case LIZARDMAN:
-				SetConsoleTextAttribute(hOut, LIZARDMANCOLOR);
+				TEXTLIZARDMAN;
 				break;
 			case ORC:
-				SetConsoleTextAttribute(hOut, ORCCOLOR);
+				TEXTORC;
 				break;
 			case BLACKDRAGON:
-				SetConsoleTextAttribute(hOut, BLACKDRAGONCOLOR);
+				TEXTBLACKDRAGON;
 				break;
 			}
 			cout << map[y][x] << " ";
 
-			SetConsoleTextAttribute(hOut, 15); // set color back to white
+			TEXTWHITE; // set color back to white
 		}
 		cout << "   ";
 		switch (y) // write tutorial
 		{
 		case 0:
-			cout << "Move your charater: " << PLAYER << " with the arrowkeys";
+			cout << "Move your character: ";
+			TEXTPLAYER;
+			cout << PLAYER;
+			TEXTWHITE;
+			cout << " with the arrowkeys";
 			break;
 		case 1:
 			cout << "Move into an enemy to begin combat";
+			break;
+		case 2:
+			cout << "Press M to mute/unmute the music.";
+			break;
+		case 3:
+			cout << "Press P to to stop/restart the music.";
+			break;
+		case 4:
+			TEXTGOBLIN;
+			cout << GOBLIN;
+			TEXTWHITE;
+			cout << " is a Goblin";
+			break;
+		case 5:
+			TEXTORC;
+			cout << ORC;
+			TEXTWHITE;
+			cout << " is an Orc";
+			break;
+		case 6:
+			TEXTLIZARDMAN;
+			cout << LIZARDMAN;
+			TEXTWHITE;
+			cout << " is a Lizardman";
+			break;
+		case 7:
+			TEXTKOBOLD;
+			cout << KOBOLD;
+			TEXTWHITE;
+			cout << " is a Kobold";
+			break;
+		case 8:
+			TEXTBLACKDRAGON;
+			cout << BLACKDRAGON;
+			TEXTWHITE;
+			cout << " is a Black Dragon";
 			break;
 		}
 

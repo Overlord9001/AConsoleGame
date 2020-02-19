@@ -51,13 +51,18 @@ bool BlackDragon::Move()
 
 	if (x < 0 || y < 0 || x > MAPX - 1 || y > MAPY - 1)
 	{
-		x == oldX;
+		x = oldX;
 		y = oldY;
 	}
 	
 	if (map->map[y][x] == ' ')
 	{
 		map->Move(oldX, oldY, x, y, icon);
+	}
+	else if (map->map[y][x] == PLAYER)
+	{
+		map->Move(oldX, oldY, x, y, icon);
+		return true;
 	}
 	else // if trying to move into a wall
 	{
@@ -67,7 +72,30 @@ bool BlackDragon::Move()
 	return false;
 }
 
-BlackDragon::BlackDragon(int hitPoint, int damage, int armorClass, int speed) : Enemy (hitPoint, damage, armorClass, speed)
+void BlackDragon::Attack(Player * player)
+{
+	float tmpRandom = rand() % 51 + 1;
+	//To get from 75% damage to 125% damage randomly
+	int currentDamage = (int)(damage *(0.75 + (tmpRandom / 100) - 0.01));
+
+	if (currentDamage > player->armor)
+	{
+		player->currentHealth -= (currentDamage - player->armor);
+		cout << "The black dragon!!! strikes you for " << (currentDamage - player->armor) << " damage \n";
+		cout << "You have " << player->currentHealth << " health left \n \n";
+	}
+	else
+	{
+		cout << "Your armor repels the attack (Damn you're op!)";
+	}
+}
+
+BlackDragon::BlackDragon(int hitPoint, int damage, int armorClass) : Enemy (hitPoint, damage, armorClass)
 {
 	icon = BLACKDRAGON;
+}
+
+BlackDragon::~BlackDragon()
+{
+
 }
