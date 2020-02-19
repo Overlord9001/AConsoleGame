@@ -360,48 +360,11 @@ int main()
 			}
 			spawnEnemies = 0;
 		}
-		// flyt til drawmap hvis man kun får ting når man har kæmpet
-#pragma region DrawingStats
 
-		map->SetCursorPosition(0, MAPY + 2);
-
-		std::cout << "Gold:" << player->gold;
-
-		map->SetCursorPosition(20, MAPY + 2);
-
-		std::cout << "Armor:" << player->armor;
-
-		map->SetCursorPosition(40, MAPY + 2);
-
-		std::cout << "Health:" << player->currentHealth;
-
-		map->SetCursorPosition(0, MAPY + 4);
-
-		std::cout << "AVG DMG:" << (int)(player->damage);
-
-		map->SetCursorPosition(20, MAPY + 4);
-
-		std::cout << "MIN DMG:" << (int)(player->damage * 0.75);
-
-		map->SetCursorPosition(40, MAPY + 4);
-
-		std::cout << "MAX DMG:" << (int)(player->damage * 1.25);
-
-		map->SetCursorPosition(0, 0);
-
-#pragma endregion
-
-#pragma region Enter Shop
-
-		map->SetCursorPosition(50, 1);
-		std::cout << "S";
-		map->SetCursorPosition(0, 0);
-
-		if (player->x == 25 && player->y == 1)
+		if (player->x == 25 && player->y == 1) // if player walks onto the shop
 		{
 			Shop();
 		}
-#pragma endregion
 
 	}
 
