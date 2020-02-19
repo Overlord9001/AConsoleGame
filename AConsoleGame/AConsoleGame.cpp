@@ -41,7 +41,7 @@ void Reset()
 		delete enemy;
 	}
 	enemies.clear(); // clear vector
-
+	
 	enemies.push_back(new Goblin(50, 10, 10));
 	enemies.push_back(new Kobold(10, 10, 10));
 	enemies.push_back(new Lizardman(10, 10, 10));
@@ -152,19 +152,15 @@ int main()
 		{
 		case ARROW_UP:
 			player->y--;
-			updateEnemies++;
 			break;
 		case ARROW_DOWN:
 			player->y++;
-			updateEnemies++;
 			break;
 		case ARROW_RIGHT:
 			player->x++;
-			updateEnemies++;
 			break;
 		case ARROW_LEFT:
 			player->x--;
-			updateEnemies++;
 			break;
 		case 'm': //mutes the music
 			if (soundEngine->getSoundVolume() != 0)
@@ -186,6 +182,15 @@ int main()
 				soundEngine->play2D("bgMusic.wav"); //starts
 			}
 			break;
+		}
+
+		if (player->x != oldX || player->y != oldY)
+		{
+			updateEnemies++;
+			if (player->currentHealth < player->maxHealth)
+			{
+				player->currentHealth++;
+			}
 		}
 
 		if (map->map[player->y][player->x] == '#') // if moving into a wall
