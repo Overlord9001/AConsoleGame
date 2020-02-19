@@ -63,7 +63,7 @@ void Orc::Attack(Player * player)
 	}
 	else
 	{
-		cout << "Your armor repels the attack";
+		cout << "Your armor repels the attack" << endl;
 	}
 	TEXTWHITE;
 }

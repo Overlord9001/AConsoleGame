@@ -189,7 +189,7 @@ void Combat(Player * player, Enemy * enemy)
 
 		if (enemy->currentHealth <= 0)
 		{
-			int goldLoot = 12;
+			int goldLoot = rand() % 7 + 9; // between 9 and 15
 			player->gold += goldLoot;
 
 			player->difficultyIncrease += 0.05f;
@@ -210,6 +210,14 @@ void Combat(Player * player, Enemy * enemy)
 		if (player->currentHealth <= 0)
 		{
 			combatInProgress = false;
+
+			system("cls");
+			TEXTRED;
+			cout << "DEATH" << endl;
+			TEXTWHITE;
+			cout << "\nPress any key to restart" << endl;
+			_getch();
+			
 			Reset();
 		}
 

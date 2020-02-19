@@ -89,7 +89,7 @@ void BlackDragon::Attack(Player * player)
 	}
 	else
 	{
-		cout << "Your armor repels the attack (Damn you're op!)";
+		cout << "Your armor repels the attack (Damn you're op!)" << endl;
 	}
 	TEXTWHITE;
 }
