@@ -20,7 +20,6 @@ public:
 	char icon = 'E';
 
 	virtual bool Move(); // return true if moving into the player to begin combat
-	void UseItem();
 	virtual void Attack(Player * player);
 
 	Enemy(int hitPoint, int damage, int armorClass);

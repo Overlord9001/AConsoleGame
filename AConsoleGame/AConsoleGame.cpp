@@ -53,6 +53,7 @@ void Reset()
 	player = Player::Instance();
 	player->item = 3;
 	map->map[player->y][player->x] = PLAYER;
+	shopLevel = 0;
 
 	system("cls");
 }
@@ -64,21 +65,21 @@ void Shop()
 
 	while (browsing == true)
 	{
-		std::cout << "Current Gold:  " << (player->gold) << "\n";
-		std::cout << "Current Damage:  " << (player->damage) << "\n";
-		std::cout << "Current Health:  " << (player->maxHealth) << "\n";
-		std::cout << "Current Armor:  " << (player->armor) << "\n";
-		std::cout << "Current Potions:  " << (player->item) << "\n\n";
+		cout << "Current Gold:  " << (player->gold) << "\n";
+		cout << "Current Damage:  " << (player->damage) << "\n";
+		cout << "Current Health:  " << (player->maxHealth) << "\n";
+		cout << "Current Armor:  " << (player->armor) << "\n";
+		cout << "Current Potions:  " << (player->item) << "\n\n";
 
-		std::cout << "1) Upgrade Damage: " << (5 + (shopLevel * 2)) << "G\n";
-		std::cout << "2) Upgrade Health: " << (4 + (shopLevel * 2)) << "G\n";
-		std::cout << "3) Upgrade Armor: " << (7 + (shopLevel * 2)) << "G\n";
-		std::cout << "4) Buy Potion: " << (3 + (shopLevel * 2)) << "G\n";
-		std::cout << "Press E to Exit";
+		cout << "1) Upgrade Damage: " << (5 + (shopLevel * 2)) << "G\n";
+		cout << "2) Upgrade Health: " << (4 + (shopLevel * 2)) << "G\n";
+		cout << "3) Upgrade Armor: " << (7 + (shopLevel * 2)) << "G\n";
+		cout << "4) Buy Potion: " << (3 + (shopLevel * 2)) << "G\n";
+		cout << "Press E to Exit";
 
 		char tempChar = _getch();
 
-		if (tempChar == '1')
+		if (tempChar == '1') // buy damage upgrade
 		{
 			if (player->gold >= (5 + (shopLevel * 2)))
 			{
@@ -88,7 +89,7 @@ void Shop()
 			}
 		}
 
-		if (tempChar == '2')
+		if (tempChar == '2') // buy health upgrade
 		{
 			if (player->gold >= (4 + (shopLevel * 2)))
 			{
@@ -98,7 +99,7 @@ void Shop()
 			}
 		}
 
-		if (tempChar == '3')
+		if (tempChar == '3') // buy armor upgrade
 		{
 			if (player->gold >= (7 + (shopLevel * 2)))
 			{
@@ -108,7 +109,7 @@ void Shop()
 			}
 		}
 
-		if (tempChar == '4')
+		if (tempChar == '4') // buy potion
 		{
 			if (player->gold >= (3 + (shopLevel * 2)))
 			{
@@ -125,11 +126,8 @@ void Shop()
 			player->y += 2;
 			browsing = false;
 			Map::Instance()->DrawMap(); // draw map again
-		}
-
-		
+		}	
 	}
-
 }
 
 //Text and turn based combat 1 vs 1
@@ -193,7 +191,7 @@ void Combat(Player * player, Enemy * enemy)
 			int goldLoot = rand() % 7 + 9; // between 9 and 15
 			player->gold += goldLoot;
 
-			player->difficultyIncrease += 0.05f;
+			player->difficultyIncrease += 0.05f; // increases difficulty with every defeated enemy
 			combatInProgress = false;
 			enemies.remove(enemy);
 			delete enemy;

@@ -180,33 +180,33 @@ void Map::DrawMap()
 	// stats
 	SetCursorPosition(0, MAPY + 2);
 
-	std::cout << "Gold:" << Player::Instance()->gold;
+	cout << "Gold:" << Player::Instance()->gold;
 
 	SetCursorPosition(20, MAPY + 2);
 
-	std::cout << "Armor:" << Player::Instance()->armor;
+	cout << "Armor:" << Player::Instance()->armor;
 
 	SetCursorPosition(40, MAPY + 2);
 
-	std::cout << "Health:" << Player::Instance()->currentHealth;
+	cout << "Health:" << Player::Instance()->currentHealth;
 
 	SetCursorPosition(0, MAPY + 4);
 
-	std::cout << "AVG DMG:" << (int)(Player::Instance()->damage);
+	cout << "AVG DMG:" << (int)(Player::Instance()->damage);
 
 	SetCursorPosition(20, MAPY + 4);
 
-	std::cout << "MIN DMG:" << (int)(Player::Instance()->damage * 0.75);
+	cout << "MIN DMG:" << (int)(Player::Instance()->damage * 0.75);
 
 	SetCursorPosition(40, MAPY + 4);
 
-	std::cout << "MAX DMG:" << (int)(Player::Instance()->damage * 1.25);
+	cout << "MAX DMG:" << (int)(Player::Instance()->damage * 1.25);
 
 	SetCursorPosition(0, 0);
 
 	// shop
 	SetCursorPosition(50, 1);
-	std::cout << "S";
+	cout << "S";
 	SetCursorPosition(0, 0);
 }
 
