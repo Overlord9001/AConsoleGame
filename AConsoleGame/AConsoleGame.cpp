@@ -60,10 +60,10 @@ void Reset()
 void Combat(Player * player, Enemy * enemy)
 {
 	system("cls"); // clear screen
-	bool enemyAlive = true;
+	bool combatInProgress = true;
 	bool playerTurn = true;
 
-	while (enemyAlive)
+	while (combatInProgress)
 	{
 		if (playerTurn == true)
 		{
@@ -101,7 +101,7 @@ void Combat(Player * player, Enemy * enemy)
 			{
 				player->gold += 12;
 			}
-			enemyAlive = false;
+			combatInProgress = false;
 			enemies.remove(enemy);
 			delete enemy;
 			system("cls"); // clear screen
@@ -109,7 +109,7 @@ void Combat(Player * player, Enemy * enemy)
 
 		if (player->currentHealth <= 0)
 		{
-			enemyAlive = false;
+			combatInProgress = false;
 			Reset();
 		}
 
