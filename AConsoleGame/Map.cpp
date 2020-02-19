@@ -23,7 +23,7 @@ void Map::SetCursorPosition(int x, int y)
 	SetConsoleCursorPosition(hOut, coord);
 }
 
-// update the visuals when a character moves
+// Move from one position in the map array to another position in the array
 void Map::Move(int oldX, int oldY, int newX, int newY, char icon)
 {
 	// set the old pos to empty

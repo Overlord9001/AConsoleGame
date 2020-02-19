@@ -4,7 +4,6 @@
 class BlackDragon : public Enemy
 {
 public:
-	void BreathAttack();
 	bool Move() override;
 	void Attack(Player * player) override;
 

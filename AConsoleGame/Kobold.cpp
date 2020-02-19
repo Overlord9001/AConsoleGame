@@ -4,10 +4,6 @@
 bool horizontal = true;
 bool vertical = false;
 
-void Kobold::SlingShot()
-{
-}
-
 bool Kobold::Move()
 {
 	Map* map = Map::Instance();

@@ -1,11 +1,6 @@
 #include "Goblin.h"
 #include "Map.h"
 
-void Goblin::Backstab()
-{
-
-}
-
 bool Goblin::Move()
 {
 	Map* map = Map::Instance();

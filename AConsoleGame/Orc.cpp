@@ -2,10 +2,6 @@
 #include "Player.h"
 #include "Map.h"
 
-void Orc::Rage()
-{
-}
-
 bool Orc::Move()
 {
 	Map* map = Map::Instance();

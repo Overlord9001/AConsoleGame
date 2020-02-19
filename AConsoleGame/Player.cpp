@@ -53,10 +53,6 @@ void Player::Attack(Enemy * enemy)
 	TEXTWHITE;
 }
 
-void Player::SpecialMove(Enemy * enemy)
-{
-}
-
 void Player::UseItem()
 {
 	if (item >= 1 && currentHealth != maxHealth)

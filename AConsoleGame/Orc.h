@@ -3,7 +3,6 @@
 class Orc : public Enemy
 {
 public:
-	void Rage();
 	bool Move() override;
 	void Attack(Player * player) override;
 

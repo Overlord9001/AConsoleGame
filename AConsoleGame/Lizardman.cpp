@@ -2,11 +2,6 @@
 #include "Enemy.h"
 #include "Map.h"
 
-void Lizardman::SpearThrow()
-{
-	
-}
-
 bool Lizardman::Move()
 {
 	Map* map = Map::Instance();
