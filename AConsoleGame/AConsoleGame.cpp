@@ -196,7 +196,6 @@ void Combat(Player * player, Enemy * enemy)
 			combatInProgress = false;
 			enemies.remove(enemy);
 			delete enemy;
-			//system("cls"); // clear screen
 			
 			cout << "You defeated the enemy gaining ";
 			TEXTORC;
@@ -220,8 +219,6 @@ void Combat(Player * player, Enemy * enemy)
 			
 			Reset();
 		}
-
-		//Decision in combat
 	}
 	
 	Map::Instance()->DrawMap(); // draw map again
@@ -231,8 +228,7 @@ int main()
 {
 	srand(static_cast<int>(time(0)));
 
-	//Window fullscreen
-	HWND console = GetConsoleWindow();
+	HWND console = GetConsoleWindow(); //Window fullscreen
 	ShowWindow(console, SW_SHOWMAXIMIZED);
 
 	Map* map = Map::Instance();
@@ -252,7 +248,8 @@ int main()
 	bool run = true;
 	while (run) // game loop
 	{
-		// save old position
+		// save old positions
+
 		oldY = player->y;
 		oldX = player->x;
 
@@ -313,8 +310,7 @@ int main()
 			{
 				if (enemy->x == player->x && enemy->y == player->y)
 				{
-					// begin combat
-					Combat(player, enemy);
+					Combat(player, enemy); // begin combat
 					break;
 				}
 			}
