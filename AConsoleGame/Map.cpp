@@ -1,5 +1,6 @@
 ﻿#include "Map.h"
 #include <Windows.h>
+#include "Player.h"
 #include <iostream>
 using namespace std;
 
@@ -175,6 +176,38 @@ void Map::DrawMap()
 
 		cout << endl;
 	}
+
+	// stats
+	SetCursorPosition(0, MAPY + 2);
+
+	std::cout << "Gold:" << Player::Instance()->gold;
+
+	SetCursorPosition(20, MAPY + 2);
+
+	std::cout << "Armor:" << Player::Instance()->armor;
+
+	SetCursorPosition(40, MAPY + 2);
+
+	std::cout << "Health:" << Player::Instance()->currentHealth;
+
+	SetCursorPosition(0, MAPY + 4);
+
+	std::cout << "AVG DMG:" << (int)(Player::Instance()->damage);
+
+	SetCursorPosition(20, MAPY + 4);
+
+	std::cout << "MIN DMG:" << (int)(Player::Instance()->damage * 0.75);
+
+	SetCursorPosition(40, MAPY + 4);
+
+	std::cout << "MAX DMG:" << (int)(Player::Instance()->damage * 1.25);
+
+	SetCursorPosition(0, 0);
+
+	// shop
+	SetCursorPosition(50, 1);
+	std::cout << "S";
+	SetCursorPosition(0, 0);
 }
 
 Map::~Map()
