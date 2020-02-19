@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Player.h"
 #include "Enemy.h"
-#include <time.h>
+#include "Map.h"
 
 Player * Player::instance = nullptr;
 
@@ -39,17 +39,18 @@ void Player::Attack(Enemy * enemy)
 	//To get from 75% damage to 125% damage randomly
 	int currentDamage = (int)(damage *(0.75 + (tempRandom / 100) - 0.01));
 
+	TEXTPLAYER;
 	if (currentDamage > enemy->armor)
 	{
 		enemy->currentHealth -= (currentDamage - enemy->armor);
 		std::cout << "You strike for " << (currentDamage - enemy->armor) << " damage \n";
 		std::cout << attacker << " has " << enemy->currentHealth << " health left \n \n";
 	}
-
 	else
 	{
-		std::cout << "Your strike was too shallow to deal damage";
+		std::cout << "Your strike was too shallow to deal damage" << endl;
 	}
+	TEXTWHITE;
 }
 
 void Player::SpecialMove(Enemy * enemy)

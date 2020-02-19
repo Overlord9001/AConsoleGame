@@ -3,8 +3,6 @@
 #include <iostream>
 using namespace std;
 
-
-static const HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 Map* Map::instance = 0; // set the instance pointer to null 
 
 Map * Map::Instance()

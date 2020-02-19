@@ -66,7 +66,7 @@ void Shop()
 	{
 		std::cout << "Current Gold:  " << (player->gold) << "\n";
 		std::cout << "Current Damage:  " << (player->damage) << "\n";
-		std::cout << "Current Health:  " << (player->maxHealth) << "G\n";
+		std::cout << "Current Health:  " << (player->maxHealth) << "\n";
 		std::cout << "Current Armor:  " << (player->armor) << "\n";
 		std::cout << "Current Potions:  " << (player->item) << "\n\n";
 
@@ -189,24 +189,35 @@ void Combat(Player * player, Enemy * enemy)
 
 		if (enemy->currentHealth <= 0)
 		{
-			if (player->item < 4)
-			{
-				player->item++;
-			}
-			else
-			{
-				player->gold += 12;
-			}
+			int goldLoot = rand() % 7 + 9; // between 9 and 15
+			player->gold += goldLoot;
+
 			player->difficultyIncrease += 0.05f;
 			combatInProgress = false;
 			enemies.remove(enemy);
 			delete enemy;
-			system("cls"); // clear screen
+			//system("cls"); // clear screen
+			
+			cout << "You defeated the enemy gaining ";
+			TEXTORC;
+			cout << goldLoot << " gold coins" << endl;
+			TEXTWHITE;
+			cout << "Press any key to continue" << endl;
+			_getch();
+			system("cls");
 		}
 
 		if (player->currentHealth <= 0)
 		{
 			combatInProgress = false;
+
+			system("cls");
+			TEXTRED;
+			cout << "DEATH" << endl;
+			TEXTWHITE;
+			cout << "\nPress any key to restart" << endl;
+			_getch();
+			
 			Reset();
 		}
 
