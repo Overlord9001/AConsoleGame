@@ -53,6 +53,7 @@ void Reset()
 	player = Player::Instance();
 	player->item = 3;
 	map->map[player->y][player->x] = PLAYER;
+	shopLevel = 0;
 
 	system("cls");
 }
