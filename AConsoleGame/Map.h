@@ -15,14 +15,14 @@
 #define ORCCOLOR 14 // yellow
 #define BLACKDRAGON 'B'
 #define BLACKDRAGONCOLOR 5 // purple
-#define TEXTWHITE SetConsoleTextAttribute(hOut, 15)
-#define TEXTPLAYER SetConsoleTextAttribute(hOut, PLAYERCOLOR)
-#define TEXTGOBLIN SetConsoleTextAttribute(hOut, GOBLINCOLOR)
-#define TEXTKOBOLD SetConsoleTextAttribute(hOut, KOBOLDCOLOR)
-#define TEXTLIZARDMAN SetConsoleTextAttribute(hOut, LIZARDMANCOLOR)
-#define TEXTORC SetConsoleTextAttribute(hOut, ORCCOLOR)
-#define TEXTBLACKDRAGON SetConsoleTextAttribute(hOut, BLACKDRAGONCOLOR)
-#define TEXTRED SetConsoleTextAttribute(hOut, 4)
+#define TEXTWHITE SetConsoleTextAttribute(hOut, 15) // changes text color to white
+#define TEXTPLAYER SetConsoleTextAttribute(hOut, PLAYERCOLOR) // changes text color to blue
+#define TEXTGOBLIN SetConsoleTextAttribute(hOut, GOBLINCOLOR) // changes text color to green
+#define TEXTKOBOLD SetConsoleTextAttribute(hOut, KOBOLDCOLOR) // changes text color to red
+#define TEXTLIZARDMAN SetConsoleTextAttribute(hOut, LIZARDMANCOLOR) // changes text color to turqoise
+#define TEXTORC SetConsoleTextAttribute(hOut, ORCCOLOR) // changes text color to yellow
+#define TEXTBLACKDRAGON SetConsoleTextAttribute(hOut, BLACKDRAGONCOLOR) // changes text color to purple
+#define TEXTRED SetConsoleTextAttribute(hOut, 4) // changes text color to dark red
 
 static const HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 

@@ -43,12 +43,12 @@ void Player::Attack(Enemy * enemy)
 	if (currentDamage > enemy->armor)
 	{
 		enemy->currentHealth -= (currentDamage - enemy->armor);
-		std::cout << "You strike for " << (currentDamage - enemy->armor) << " damage \n";
-		std::cout << attacker << " has " << enemy->currentHealth << " health left \n \n";
+		cout << "You strike for " << (currentDamage - enemy->armor) << " damage \n";
+		cout << attacker << " has " << enemy->currentHealth << " health left \n \n";
 	}
 	else
 	{
-		std::cout << "Your strike was too shallow to deal damage" << endl;
+		cout << "Your strike was too shallow to deal damage" << endl;
 	}
 	TEXTWHITE;
 }
@@ -58,13 +58,13 @@ void Player::UseItem()
 	if (item >= 1 && currentHealth != maxHealth)
 	{
 		currentHealth = maxHealth;
-		std::cout << "You pull out and drink a potion regenerating your health to full\n\n";
+		cout << "You pull out and drink a potion regenerating your health to full\n\n";
 		item--;
 	}
 
 	else
 	{
-		std::cout << "You have no potions\n\n";
+		cout << "You have no potions\n\n";
 	}
 }
 
