@@ -82,7 +82,7 @@ void Combat(Player * player, Enemy * enemy)
 		attacker = "Black Dragon";
 		break;
 	}
-	cout << "Your enemy is a(n) " << attacker << endl; // tells player which enemy they're fighting
+	cout << "Your enemy is a(n) " << attacker << "\nTheir stats are:\n" << "Average damage: " << enemy->damage << "\nHealth: " << enemy->currentHealth << "\nArmor Class: " << enemy->armor << endl; // tells player which enemy they're fighting adn their stats
 
 	while (enemyAlive)
 	{
