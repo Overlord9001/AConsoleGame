@@ -132,6 +132,7 @@ void Shop()
 
 }
 
+//Text and turn based combat 1 vs 1
 void Combat(Player * player, Enemy * enemy)
 {
 	system("cls"); // clear screen
@@ -158,7 +159,7 @@ void Combat(Player * player, Enemy * enemy)
 		attacker = "Black Dragon";
 		break;
 	}
-	cout << "Your enemy is a(n) " << attacker << "\nTheir stats are:\n" << "Average damage: " << enemy->damage << "\nHealth: " << enemy->currentHealth << "\nArmor Class: " << enemy->armor << endl; // tells player which enemy they're fighting adn their stats
+	cout << "Your enemy is a(n) " << attacker << "\nTheir stats are:\n" << "Average damage: " << enemy->damage << "\nHealth: " << enemy->currentHealth << "\nArmor Class: " << enemy->armor << endl; // tells player which enemy they're fighting and that enemy's stats
 
 	while (combatInProgress)
 	{
@@ -206,7 +207,7 @@ void Combat(Player * player, Enemy * enemy)
 			system("cls");
 		}
 
-		if (player->currentHealth <= 0)
+		if (player->currentHealth <= 0) // The player died
 		{
 			combatInProgress = false;
 
@@ -290,7 +291,7 @@ int main()
 			break;
 		}
 
-		if (player->x != oldX || player->y != oldY)
+		if (player->x != oldX || player->y != oldY) // if player moved since last update, increase timers and heal hp by one each
 		{
 			updateEnemies++;
 			spawnEnemies++;
@@ -335,7 +336,7 @@ int main()
 			}
 			updateEnemies = 0;
 		}
-		if (spawnEnemies >= 20)
+		if (spawnEnemies >= 20) // Player has taken 20 steps, which spawns a new random enemy
 		{
 			switch (rand() % 5)
 			{
