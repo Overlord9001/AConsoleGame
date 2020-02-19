@@ -66,6 +66,7 @@ void Kobold::Attack(Player * player)
 	//To get from 75% damage to 125% damage randomly
 	int currentDamage = (int)(damage *(0.75 + (tmpRandom / 100) - 0.01));
 
+	TEXTRED;
 	if (currentDamage > player->armor)
 	{
 		player->currentHealth -= (currentDamage - player->armor);
@@ -76,6 +77,7 @@ void Kobold::Attack(Player * player)
 	{
 		cout << "Your armor repels the attack";
 	}
+	TEXTWHITE;
 }
 
 Kobold::Kobold(int hitPoint, int damage, int armorClass) : Enemy (hitPoint, damage, armorClass)

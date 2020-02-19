@@ -184,19 +184,22 @@ void Combat(Player * player, Enemy * enemy)
 
 		if (enemy->currentHealth <= 0)
 		{
-			if (player->item < 4)
-			{
-				player->item++;
-			}
-			else
-			{
-				player->gold += 12;
-			}
+			int goldLoot = 12;
+			player->gold += goldLoot;
+
 			player->difficultyIncrease += 0.05f;
 			combatInProgress = false;
 			enemies.remove(enemy);
 			delete enemy;
-			system("cls"); // clear screen
+			//system("cls"); // clear screen
+			
+			cout << "You defeated the enemy gaining ";
+			TEXTORC;
+			cout << goldLoot << " gold coins" << endl;
+			TEXTWHITE;
+			cout << "Press any key to continue" << endl;
+			_getch();
+			system("cls");
 		}
 
 		if (player->currentHealth <= 0)

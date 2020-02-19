@@ -1,4 +1,5 @@
 #pragma once
+#include <Windows.h>
 
 #define MAPX 50
 #define MAPY 25
@@ -21,7 +22,9 @@
 #define TEXTLIZARDMAN SetConsoleTextAttribute(hOut, LIZARDMANCOLOR)
 #define TEXTORC SetConsoleTextAttribute(hOut, ORCCOLOR)
 #define TEXTBLACKDRAGON SetConsoleTextAttribute(hOut, BLACKDRAGONCOLOR)
+#define TEXTRED SetConsoleTextAttribute(hOut, 4)
 
+static const HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
 class Map
 {
@@ -34,6 +37,7 @@ public:
 	void DrawMap();
 	int playerX = 5;
 	int playerY = 5;
+	
 	~Map();
 
 private:
