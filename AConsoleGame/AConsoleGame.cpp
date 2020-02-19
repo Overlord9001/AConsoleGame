@@ -164,7 +164,7 @@ void Combat(Player * player, Enemy * enemy)
 	{
 		if (playerTurn == true)
 		{
-			cout << "A to attack, U to use item\n\n"; 
+			cout << "\nA to attack, U to use item\n\n"; 
 			char tempChar = _getch();
 
 			if (tempChar == 'a')
