@@ -42,11 +42,11 @@ void Reset()
 	}
 	enemies.clear(); // clear vector
 
-	enemies.push_back(new Goblin(50, 10, 10));
-	enemies.push_back(new Kobold(10, 10, 10));
-	enemies.push_back(new Lizardman(10, 10, 10));
-	enemies.push_back(new Orc(10, 10, 10));
-	enemies.push_back(new BlackDragon(10, 10, 10));
+	enemies.push_back(new Goblin(10, 2, 0));
+	enemies.push_back(new Kobold(15, 3, 0));
+	enemies.push_back(new Lizardman(30, 4, 2));
+	enemies.push_back(new Orc(20, 5, 1));
+	enemies.push_back(new BlackDragon(50, 10, 5));
 
 	map->MapSetup(MAPX, MAPY);
 	delete player;
@@ -79,9 +79,9 @@ void Combat(Player * player, Enemy * enemy)
 
 			if (tempChar == 'u')
 			{
-					player->UseItem();
-					playerTurn = false;
-					tempChar = 'P';
+				player->UseItem();
+				playerTurn = false;
+				tempChar = 'P';
 			}
 			
 		}
@@ -101,6 +101,7 @@ void Combat(Player * player, Enemy * enemy)
 			{
 				player->gold += 12;
 			}
+			player->difficultyIncrease += 0.05f;
 			enemyAlive = false;
 			enemies.remove(enemy);
 			delete enemy;
@@ -141,6 +142,7 @@ int main()
 	int oldY = 0;
 
 	int updateEnemies = 0;
+	int spawnEnemies = 0;
 	bool run = true;
 	while (run) // game loop
 	{
@@ -153,18 +155,22 @@ int main()
 		case ARROW_UP:
 			player->y--;
 			updateEnemies++;
+			spawnEnemies++;
 			break;
 		case ARROW_DOWN:
 			player->y++;
 			updateEnemies++;
+			spawnEnemies++;
 			break;
 		case ARROW_RIGHT:
 			player->x++;
 			updateEnemies++;
+			spawnEnemies++;
 			break;
 		case ARROW_LEFT:
 			player->x--;
 			updateEnemies++;
+			spawnEnemies++;
 			break;
 		case 'm': //mutes the music
 			if (soundEngine->getSoundVolume() != 0)
@@ -224,7 +230,29 @@ int main()
 			}
 			updateEnemies = 0;
 		}
-
+		if (spawnEnemies >= 20)
+		{
+			switch (rand() % 5)
+			{
+			case 0:
+				enemies.push_back(new Goblin(10 + 10.0f * player->difficultyIncrease, 2 + 2.0f * player->difficultyIncrease, 0));
+				break;
+			case 1:
+				enemies.push_back(new Orc(20 + 20.0f * player->difficultyIncrease, 5 + 5.0f * player->difficultyIncrease, 1 + 1.0f * player->difficultyIncrease));
+				break;
+			case 2:
+				enemies.push_back(new Kobold(15 + 15.0f * player->difficultyIncrease, 3 + 3.0f * player->difficultyIncrease, 0.5f + 0.5f * player->difficultyIncrease));
+				break;
+			case 3:
+				enemies.push_back(new Lizardman(30 + 50.0f * player->difficultyIncrease, 4 + 4.0f * player->difficultyIncrease, 2 + 2.0f * player->difficultyIncrease));
+				break;
+			case 4:
+				enemies.push_back(new BlackDragon(50 + 50.0f * player->difficultyIncrease, 10 + 10.0f * player->difficultyIncrease, 5 + 5.0f * player->difficultyIncrease));
+				break;
+			}
+			spawnEnemies = 0;
+		}
+		// flyt til drawmap hvis man kun får ting når man har kæmpet
 #pragma region DrawingStats
 
 		map->SetCursorPosition(0, MAPY + 2);

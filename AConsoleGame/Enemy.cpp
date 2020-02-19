@@ -64,8 +64,14 @@ void Enemy::Attack(Player * player)
 
 Enemy::Enemy(int hitPoint, int damage, int armorClass)
 {
-	x = 15;
-	y = 15;
+	Player* player = Player::Instance();
+
+	do // spawn on a random place that is not on top of the player
+	{
+		x = rand() % (MAPX - 2) + 1;
+		y = rand() % (MAPY - 2) + 1;
+	} while (player->x == x && player->y == y);
+
 	this->maxHealth = hitPoint;
 	this->damage = damage;
 	this->armor = armorClass;
